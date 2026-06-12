@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C组 - 2026年世界杯赛程</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); min-height: 100vh; color: #fff; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; padding: 30px 20px; background: linear-gradient(90deg, rgba(255,215,0,0.1), rgba(255,140,0,0.1)); border-radius: 16px; margin-bottom: 30px; }
+        .header h1 { font-size: 2.2em; background: linear-gradient(90deg, #ffd700, #ff8c00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .back-link { display: inline-block; margin-bottom: 15px; color: #aaa; text-decoration: none; font-size: 0.9em; }
+        .back-link:hover { color: #ffd700; }
+        .standings-section, .matches-section { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; margin-bottom: 30px; }
+        .section-title { font-size: 1.3em; color: #ffd700; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .standings-table { width: 100%; border-collapse: collapse; }
+        .standings-table th, .standings-table td { padding: 12px 10px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .standings-table th { background: rgba(255,215,0,0.1); color: #ffd700; font-weight: bold; font-size: 0.9em; }
+        .standings-table td { font-size: 0.95em; }
+        .standings-table .rank-1 { color: #ffd700; font-weight: bold; }
+        .standings-table .rank-2 { color: #c0c0c0; font-weight: bold; }
+        .standings-table .rank-3 { color: #cd7f32; font-weight: bold; }
+        .team-cell { display: flex; align-items: center; gap: 8px; justify-content: flex-start; }
+        .team-flag { font-size: 1.3em; }
+        .team-name { font-weight: 500; }
+        .match-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 15px 20px; margin-bottom: 12px; border-left: 4px solid #ffd700; }
+        .match-item:last-child { margin-bottom: 0; }
+        .match-item.match-highlight { background: rgba(255,215,0,0.1); border-left-color: #ff6b6b; }
+        .match-time { color: #ffd700; font-size: 0.95em; margin-bottom: 8px; }
+        .match-teams { display: flex; align-items: center; justify-content: space-between; font-size: 1.1em; margin-bottom: 8px; }
+        .match-vs { color: #888; font-size: 0.85em; }
+        .match-score { font-size: 1.3em; font-weight: bold; color: #4ade80; margin-left: 15px; }
+        .match-score.pending { color: #666; font-size: 0.9em; }
+        .match-venue { color: #888; font-size: 0.85em; }
+        .footer { text-align: center; color: #666; padding: 20px; font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← 返回首页</a>
+        <div class="header">
+            <h1>🏆 C组</h1>
+            <p style="color:#aaa;margin-top:10px;">巴西 / 摩洛哥 / 海地 / 苏格兰</p>
+        </div>
+        
+        <div class="standings-section">
+            <div class="section-title">📊 小组积分榜</div>
+            <table class="standings-table">
+                <thead><tr><th>排名</th><th>球队</th><th>赛</th><th>胜</th><th>平</th><th>负</th><th>进/失</th><th>积分</th></tr></thead>
+                <tbody>
+                    <tr><td class="rank-1">1</td><td><div class="team-cell"><span class="team-flag">🇧🇷</span><span class="team-name">巴西</span></div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0/0</td><td>0</td></tr>
+                    <tr><td class="rank-2">2</td><td><div class="team-cell"><span class="team-flag">🇲🇦</span><span class="team-name">摩洛哥</span></div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0/0</td><td>0</td></tr>
+                    <tr><td class="rank-3">3</td><td><div class="team-cell"><span class="team-flag">🏴󠁧󠁢󠁳󠁣󠁴󠁿</span><span class="team-name">苏格兰</span></div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0/0</td><td>0</td></tr>
+                    <tr><td>4</td><td><div class="team-cell"><span class="team-flag">🇭🇹</span><span class="team-name">海地</span></div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0/0</td><td>0</td></tr>
+                </tbody>
+            </table>
+            <p style="margin-top:15px;color:#666;font-size:0.85em;">📌 积分规则：胜=3分 平=1分 负=0分</p>
+        </div>
+        
+        <div class="matches-section">
+            <div class="section-title">⚽ 小组赛程</div>
+            <div class="match-item match-highlight"><div class="match-time">6月14日 06:00 🔥</div><div class="match-teams"><span>🇧🇷 巴西</span><span class="match-vs">vs</span><span>摩洛哥 🇲🇦</span></div><div class="match-venue">📍 纽约</div><div class="match-score pending">等待开赛</div></div>
+            <div class="match-item"><div class="match-time">6月14日 09:00</div><div class="match-teams"><span>🇭🇹 海地</span><span class="match-vs">vs</span><span>苏格兰 🏴󠁧󠁢󠁳󠁣󠁴󠁿</span></div><div class="match-venue">📍 波士顿</div><div class="match-score pending">等待开赛</div></div>
+            <div class="match-item"><div class="match-time">6月20日 03:00</div><div class="match-teams"><span>🏴󠁧󠁢󠁳󠁣󠁴󠁿 苏格兰</span><span class="match-vs">vs</span><span>摩洛哥 🇲🇦</span></div><div class="match-venue">📍 波士顿</div><div class="match-score pending">等待开赛</div></div>
+            <div class="match-item"><div class="match-time">6月20日 09:00</div><div class="match-teams"><span>🇧🇷 巴西</span><span class="match-vs">vs</span><span>海地 🇭🇹</span></div><div class="match-venue">📍 费城</div><div class="match-score pending">等待开赛</div></div>
+            <div class="match-item"><div class="match-time">6月25日 06:00</div><div class="match-teams"><span>🏴󠁧󠁢󠁳󠁣󠁴󠁿 苏格兰</span><span class="match-vs">vs</span><span>巴西 🇧🇷</span></div><div class="match-venue">📍 迈阿密</div><div class="match-score pending">等待开赛</div></div>
+            <div class="match-item"><div class="match-time">6月25日 06:00</div><div class="match-teams"><span>🇲🇦 摩洛哥</span><span class="match-vs">vs</span><span>海地 🇭🇹</span></div><div class="match-venue">📍 亚特兰大</div><div class="match-score pending">等待开赛</div></div>
+        </div>
+        
+        <div class="footer"><p>📌 赛事时间可能存在调整，请以官方最新公布为准</p><p>🔄 每日下午5点自动更新</p></div>
+    </div>
+</body>
+</html>
