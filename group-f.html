@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>F组 - 2026年世界杯赛程</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); min-height: 100vh; color: #fff; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        .header { text-align: center; padding: 30px 20px; background: linear-gradient(90deg, rgba(255,215,0,0.1), rgba(255,140,0,0.1)); border-radius: 16px; margin-bottom: 30px; }
+        .header h1 { font-size: 2.2em; background: linear-gradient(90deg, #ffd700, #ff8c00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .back-link { display: inline-block; margin-bottom: 15px; color: #aaa; text-decoration: none; }
+        .standings-section, .matches-section { background: rgba(255,255,255,0.05); border-radius: 16px; padding: 20px; margin-bottom: 30px; }
+        .section-title { font-size: 1.3em; color: #ffd700; margin-bottom: 15px; }
+        .standings-table { width: 100%; border-collapse: collapse; }
+        .standings-table th, .standings-table td { padding: 12px 10px; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .standings-table th { background: rgba(255,215,0,0.1); color: #ffd700; }
+        .rank-1 { color: #ffd700; font-weight: bold; }
+        .rank-2 { color: #c0c0c0; font-weight: bold; }
+        .rank-3 { color: #cd7f32; font-weight: bold; }
+        .team-cell { display: flex; align-items: center; gap: 8px; justify-content: flex-start; }
+        .team-flag { font-size: 1.3em; }
+        .match-item { background: rgba(0,0,0,0.2); border-radius: 12px; padding: 15px 20px; margin-bottom: 12px; border-left: 4px solid #ffd700; }
+        .match-item.match-highlight { border-left-color: #ff6b6b; background: rgba(255,215,0,0.1); }
+        .match-time { color: #ffd700; margin-bottom: 8px; }
+        .match-teams { display: flex; align-items: center; justify-content: space-between; font-size: 1.1em; margin-bottom: 8px; }
+        .match-vs { color: #888; font-size: 0.85em; }
+        .match-score { font-size: 1.3em; font-weight: bold; color: #4ade80; margin-left: 15px; }
+        .match-score.pending { color: #666; font-size: 0.9em; }
+        .match-venue { color: #888; font-size: 0.85em; }
+        .footer { text-align: center; color: #666; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← 返回首页</a>
+        <div class="header"><h1>🏆 F组</h1><p style="color:#aaa;margin-top:10px;">荷兰 / 日本 / 突尼斯 / 瑞典</p></div>
+        <div class="standings-section">
+            <div class="section-title">📊 小组积分榜</div>
+            <table class="standings-table">
+                <thead><tr><th>排名</th><th>球队</th><th>赛</th><th>胜</th><th>平</th><th>负</th><th>进/失</th><th>积分</th></tr></thead>
+                <tbody>
+                    <tr><td class="rank-1">1</td><td><div class="team-cell"><span class="team-flag">🇳🇱</span><span class="team-name">荷兰</span></div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0/0</td><td>0</td></tr>
+                    <tr><td class="rank-2">2</td><td><div class="team-cell"><span class="team-flag">🇯🇵</span><span class="team-name">日本</span></div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0/0</td><td>0</td></tr>
+                    <tr><td class="rank-3">3</td><td><div class="team-cell"><span class="team-flag">🇸🇪</span><span class="team-name">瑞典</span></div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0/0</td><td>0</td></tr>
+                    <tr><td>4</td><td><div class="team-cell"><span class="team-flag">🇹🇳</span><span class="team-name">突尼斯</span></div></td><td>0</td><td>0</td><td>0</td><td>0</td><td>0/0</td><td>0</td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="matches-section">
+            <div class="section-title">⚽ 小组赛程</div>
+            <div class="match-item match-highlight"><div class="match-time">6月15日 04:00 🔥</div><div class="match-teams"><span>🇳🇱 荷兰</span><span class="match-vs">vs</span><span>日本 🇯🇵</span></div><div class="match-venue">📍 达拉斯</div><div class="match-score pending">等待开赛</div></div>
+            <div class="match-item"><div class="match-time">6月15日 10:00</div><div class="match-teams"><span>🇹🇳 突尼斯</span><span class="match-vs">vs</span><span>瑞典 🇸🇪</span></div><div class="match-venue">📍 蒙特雷</div><div class="match-score pending">等待开赛</div></div>
+            <div class="match-item"><div class="match-time">6月21日 01:00</div><div class="match-teams"><span>🇳🇱 荷兰</span><span class="match-vs">vs</span><span>瑞典 🇸🇪</span></div><div class="match-venue">📍 休斯顿</div><div class="match-score pending">等待开赛</div></div>
+            <div class="match-item"><div class="match-time">6月21日 12:00</div><div class="match-teams"><span>🇹🇳 突尼斯</span><span class="match-vs">vs</span><span>日本 🇯🇵</span></div><div class="match-venue">📍 蒙特雷</div><div class="match-score pending">等待开赛</div></div>
+            <div class="match-item"><div class="match-time">6月26日 05:00</div><div class="match-teams"><span>🇹🇳 突尼斯</span><span class="match-vs">vs</span><span>荷兰 🇳🇱</span></div><div class="match-venue">📍 堪萨斯城</div><div class="match-score pending">等待开赛</div></div>
+            <div class="match-item"><div class="match-time">6月26日 05:00</div><div class="match-teams"><span>🇯🇵 日本</span><span class="match-vs">vs</span><span>瑞典 🇸🇪</span></div><div class="match-venue">📍 达拉斯</div><div class="match-score pending">等待开赛</div></div>
+        </div>
+        <div class="footer"><p>🔄 每日下午5点自动更新</p></div>
+    </div>
+</body>
+</html>
