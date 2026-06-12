@@ -5,6 +5,7 @@ on:
     branches: [master]
     paths:
       - 'world_cup/**'
+      - '*.html'
   workflow_dispatch:
 
 permissions:
