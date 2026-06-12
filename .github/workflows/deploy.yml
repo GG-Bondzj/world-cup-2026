@@ -1,0 +1,43 @@
+name: 自动部署到 GitHub Pages
+
+on:
+  push:
+    branches: [master]
+    paths:
+      - 'world_cup/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: 检出代码
+        uses: actions/checkout@v4
+
+      - name: 准备发布目录
+        run: |
+          mkdir -p _site
+          cp world_cup/*.html _site/
+          touch _site/.nojekyll
+          echo "✅ 已复制 $(ls _site/*.html | wc -l) 个页面文件"
+
+      - name: 上传 Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+
+      - name: 部署到 GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
