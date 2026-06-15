@@ -149,27 +149,30 @@ def match_html(m, group_mode=False):
     
     item_class = 'match-item match-highlight' if highlight else 'match-item'
     
+    # 清理 venue 中可能已有的 📍 前缀，避免重复
+    venue_clean = venue.replace('📍 ', '').replace('📍', '').strip()
+
     if status == 'finished':
-        time_display = time_str
+        # 清理 time_str 中可能已有的 ✅ 已结束，避免重复
+        time_base = time_str.replace(' ✅ 已结束', '').strip()
+        time_display = time_base + ' ✅ 已结束'
         score_h = m.get('score_home', 0)
         score_a = m.get('score_away', 0)
-        status_tag = ' ✅ 已结束'
         score_html = f'<span class="match-score">{score_h}-{score_a}</span>'
     else:
         time_display = time_str
-        status_tag = ''
         score_html = '<span class="match-vs">vs</span>'
     
     html = f'<div class="{item_class}">\n'
-    html += f'    <div class="match-time">{time_display}{status_tag}</div>\n'
+    html += f'    <div class="match-time">{time_display}</div>\n'
     html += f'    <div class="match-teams">\n'
     html += f'        <span>{h_flag} {h_name}</span>\n'
     html += f'        {score_html}\n'
-    html += f'        <span>{a_flag} {a_name}</span>\n'
+    html += f'        <span>{a_name} {a_flag}</span>\n'
     html += f'    </div>\n'
     
-    if venue:
-        html += f'    <div class="match-venue">📍 {venue}</div>\n'
+    if venue_clean:
+        html += f'    <div class="match-venue">📍 {venue_clean}</div>\n'
     
     if tag:
         html += f'    <div style="margin-top:10px;"><span class="match-tag">🔥 {tag}</span></div>\n'
