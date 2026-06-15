@@ -82,25 +82,35 @@ def flag(name):
 def calc_standings(group_data):
     """计算小组积分榜"""
     teams = {t: {'name':t, 'played':0, 'won':0, 'drawn':0, 'lost':0, 'gf':0, 'ga':0, 'pts':0} for t in group_data['teams']}
-    
+
     for m in group_data['matches']:
+        # 只统计状态为finished且有比分数据的比赛
         if m.get('status') != 'finished':
             continue
+        # 检查是否有有效比分（必须是数字）
+        sh = m.get('score_home')
+        sa = m.get('score_away')
+        if sh is None or sa is None:
+            continue
+        try:
+            sh = int(sh)
+            sa = int(sa)
+        except (ValueError, TypeError):
+            continue
+
         home = m.get('home_name') or clean_team(m.get('home',''))
         away = m.get('away_name') or clean_team(m.get('away',''))
         if home not in teams or away not in teams:
             continue
-        
-        sh = m.get('score_home', 0)
-        sa = m.get('score_away', 0)
-        
+
         teams[home]['played'] += 1
         teams[away]['played'] += 1
         teams[home]['gf'] += sh
         teams[home]['ga'] += sa
         teams[away]['gf'] += sa
         teams[away]['ga'] += sh
-        
+
+        # 修复：正确的胜负逻辑
         if sh > sa:
             teams[home]['won'] += 1
             teams[away]['lost'] += 1
@@ -114,7 +124,7 @@ def calc_standings(group_data):
             teams[away]['drawn'] += 1
             teams[home]['pts'] += 1
             teams[away]['pts'] += 1
-    
+
     # 排序：积分 -> 净胜球 -> 进球
     sorted_teams = sorted(teams.values(), key=lambda t: (-t['pts'], -(t['gf']-t['ga']), -t['gf']))
     return sorted_teams
@@ -124,8 +134,9 @@ def clean_team(text):
     if not text:
         return ''
     text = text.strip()
-    for f, n in FLAGS.items():
-        text = text.replace(f, '')
+    # 去掉所有国旗 emoji（FLAGS 的 value 是 emoji，key 是队名）
+    for name, emoji in FLAGS.items():
+        text = text.replace(emoji, '')
     return text.strip()
 
 def clean_home_away(m):
@@ -140,15 +151,15 @@ def match_html(m, group_mode=False):
     a_name = m['away_name']
     h_flag = flag(h_name)
     a_flag = flag(a_name)
-    
+
     status = m.get('status', 'pending')
     time_str = m.get('time', '')
     venue = m.get('venue', '')
     highlight = m.get('highlight', False)
     tag = m.get('tag', '')
-    
+
     item_class = 'match-item match-highlight' if highlight else 'match-item'
-    
+
     # 清理 venue 中可能已有的 📍 前缀，避免重复
     venue_clean = venue.replace('📍 ', '').replace('📍', '').strip()
 
@@ -156,13 +167,13 @@ def match_html(m, group_mode=False):
         # 清理 time_str 中可能已有的 ✅ 已结束，避免重复
         time_base = time_str.replace(' ✅ 已结束', '').strip()
         time_display = time_base + ' ✅ 已结束'
-        score_h = m.get('score_home', 0)
-        score_a = m.get('score_away', 0)
+        score_h = m.get('score_home', 0) or 0
+        score_a = m.get('score_away', 0) or 0
         score_html = f'<span class="match-score">{score_h}-{score_a}</span>'
     else:
         time_display = time_str
         score_html = '<span class="match-vs">vs</span>'
-    
+
     html = f'<div class="{item_class}">\n'
     html += f'    <div class="match-time">{time_display}</div>\n'
     html += f'    <div class="match-teams">\n'
@@ -170,24 +181,23 @@ def match_html(m, group_mode=False):
     html += f'        {score_html}\n'
     html += f'        <span>{a_name} {a_flag}</span>\n'
     html += f'    </div>\n'
-    
+
     if venue_clean:
         html += f'    <div class="match-venue">📍 {venue_clean}</div>\n'
-    
+
     if tag:
         html += f'    <div style="margin-top:10px;"><span class="match-tag">🔥 {tag}</span></div>\n'
-    
+
     if m.get('events'):
         html += f'    <div class="match-result">{m["events"]}</div>\n'
-    
+
     html += '</div>\n'
     return html
-
 
 def gen_index(data, output_dir):
     """生成首页 index.html"""
     groups = data['groups']
-    
+
     # 小组卡片
     group_cards = ''
     for g in 'ABCDEFGHIJKL':
@@ -202,7 +212,7 @@ def gen_index(data, output_dir):
                     </div>
                 </div>
             </a>\n'''
-    
+
     # 日期卡片 - 从数据中生成
     date_cards = ''
     day_labels = {
@@ -224,7 +234,7 @@ def gen_index(data, output_dir):
         '0627': ('6月27日', '周六 · 焦点', '6场'),
         '0628': ('6月28日', '周日 · 小组赛结束', '6场'),
     }
-    
+
     for key in sorted(data['dates'].keys()):
         dd = data['dates'][key]
         if key in day_labels:
@@ -242,7 +252,7 @@ def gen_index(data, output_dir):
                     <span style="background:rgba(255,215,0,0.2);color:#ffd700;padding:5px 12px;border-radius:20px;font-size:0.85em;">{count}</span>
                 </div>
             </a>\n'''
-    
+
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -258,20 +268,20 @@ def gen_index(data, output_dir):
             <div class="subtitle">FIFA World Cup USA / Mexico / Canada</div>
             <div class="dates">📅 2026年6月12日 - 7月20日</div>
         </div>
-        
+
         <div class="info-bar">
             <div class="info-item"><div class="label">参赛球队</div><div class="value">48支</div></div>
             <div class="info-item"><div class="label">总场次</div><div class="value">104场</div></div>
             <div class="info-item"><div class="label">比赛天数</div><div class="value">39天</div></div>
             <div class="info-item"><div class="label">主办国</div><div class="value">美加墨</div></div>
         </div>
-        
+
         <div class="nav-section">
             <div class="nav-title">⚽ 按小组查看（带积分榜）</div>
             <div class="nav-grid">
 {group_cards}            </div>
         </div>
-        
+
         <div class="nav-section">
             <div class="nav-title">📅 按日期查看（比赛结果）</div>
             <div class="nav-grid">
@@ -286,7 +296,7 @@ def gen_index(data, output_dir):
                 </a>
             </div>
         </div>
-        
+
         <div class="nav-section">
             <div class="nav-title">🏆 淘汰赛专区</div>
             <div style="margin-bottom:25px;"><div style="font-size:1.2em;color:#ff6b6b;margin-bottom:15px;">🎯 1/8决赛 (7月5日-7月8日)</div><div class="nav-grid"><a href="knockout.html#round8" class="nav-card"><div>🎯 1/8决赛</div><div style="font-size:0.85em;color:#aaa;">7月5日-7月8日 · 8场</div></a></div></div>
@@ -296,7 +306,7 @@ def gen_index(data, output_dir):
             <div style="margin-bottom:25px;"><div style="font-size:1.2em;color:#ff6b6b;margin-bottom:15px;">🥉 季军赛 (7月19日)</div><div class="nav-grid"><a href="knockout.html#third" class="nav-card"><div>🥉 季军赛</div><div style="font-size:0.85em;color:#aaa;">7月19日 03:00</div></a></div></div>
             <div style="margin-bottom:25px;"><div style="font-size:1.2em;color:#ff6b6b;margin-bottom:15px;">🏆 决赛 (7月20日)</div><div class="nav-grid"><a href="knockout.html#final" class="nav-card" style="background:linear-gradient(135deg,rgba(255,215,0,0.2),rgba(255,140,0,0.3));border-color:#ffd700;"><div>🏆 决赛</div><div style="font-size:0.85em;color:#aaa;">7月20日 03:00 · 纽约</div></a></div></div>
         </div>
-        
+
         <div class="nav-section">
             <div class="nav-title">🎖️ 决赛之路</div>
             <div style="background:linear-gradient(135deg,rgba(255,215,0,0.1),rgba(255,140,0,0.1));border-radius:16px;padding:30px;text-align:center;border:1px solid rgba(255,215,0,0.3);">
@@ -308,7 +318,7 @@ def gen_index(data, output_dir):
                 <div style="color:#888;"><a href="knockout.html#final" style="color:#ffd700;text-decoration:none;">查看完整淘汰赛晋级之路 →</a></div>
             </div>
         </div>
-        
+
         <div class="footer">
             <p>📌 赛事时间可能存在调整，请以官方最新公布为准</p>
             <p>🏆 2026年美加墨世界杯 · 北京时间</p>
@@ -317,17 +327,16 @@ def gen_index(data, output_dir):
     </div>
 </body>
 </html>'''
-    
+
     with open(output_dir / 'index.html', 'w', encoding='utf-8') as f:
         f.write(html)
     print("  ✅ index.html")
-
 
 def gen_group(data, group_name, output_dir):
     """生成小组页面"""
     gd = data['groups'][group_name]
     standings = calc_standings(gd)
-    
+
     # 积分榜
     rows = ''
     for i, t in enumerate(standings):
@@ -339,12 +348,12 @@ def gen_group(data, group_name, output_dir):
                     <td>{t['played']}</td><td>{t['won']}</td><td>{t['drawn']}</td><td>{t['lost']}</td>
                     <td>{gf_ga}</td><td>{t['pts']}</td>
                 </tr>\n'''
-    
+
     # 比赛
     matches_html = ''
     for m in gd['matches']:
         matches_html += match_html(m, group_mode=True)
-    
+
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -376,29 +385,28 @@ def gen_group(data, group_name, output_dir):
     </div>
 </body>
 </html>'''
-    
+
     with open(output_dir / f'group-{group_name.lower()}.html', 'w', encoding='utf-8') as f:
         f.write(html)
-
 
 def gen_date(data, date_key, output_dir):
     """生成日期页面"""
     dd = data['dates'][date_key]
     matches = dd['matches']
-    
+
     month = int(date_key[:2])
     day = int(date_key[2:])
     dt = datetime(2026, month, day)
     day_name = DAY_NAMES.get(dt.weekday(), '')
     total = len(matches)
-    
+
     # 特殊标签
     special = {
         '0612': ('🏆 揭幕战', '世界杯开幕日'),
         '0628': ('📋 小组赛收官', '小组赛结束'),
     }
     title, week = special.get(date_key, (f'{month}月{day}日', day_name))
-    
+
     matches_html = ''
     for m in matches:
         clean_home_away(m)
@@ -406,36 +414,36 @@ def gen_date(data, date_key, output_dir):
         a_name = m['away_name']
         h_flag = flag(h_name)
         a_flag = flag(a_name)
-        
+
         status = m.get('status', 'pending')
         highlight = m.get('highlight', False)
         tag = m.get('tag', '')
         group_label = m.get('group', '')
         venue = m.get('venue', '')
-        
+
         item_class = 'match-item highlight' if highlight else 'match-item'
-        
+
         if status == 'finished':
             time_display = f'{m.get("kickoff","")} ✅ 已结束'
-            score_h = m.get('score_home', 0)
-            score_a = m.get('score_away', 0)
+            score_h = m.get('score_home', 0) or 0
+            score_a = m.get('score_away', 0) or 0
             score_text = f'{score_h}-{score_a}'
             score_html = f'<span class="match-score">{score_text}</span>'
         else:
             time_display = m.get('time', '')
             score_html = '<span class="match-vs">vs</span>'
-        
+
         info_parts = []
         if group_label:
             info_parts.append(f'<span class="match-group">{group_label}</span>')
         if venue:
             info_parts.append(f'<span class="match-venue">📍 {venue}</span>')
         info_html = '<div>' + ''.join(info_parts) + '</div>' if info_parts else ''
-        
+
         tag_html = f'<div style="margin-top:10px;"><span class="match-tag">🔥 {tag}</span></div>' if tag else ''
-        
+
         events_html = f'<div style="margin-top:8px;color:#888;font-size:0.85em;">{m["events"]}</div>' if m.get('events') else ''
-        
+
         matches_html += f'''            <div class="{item_class}">
                 <div class="match-time">{time_display}</div>
                 <div class="match-teams">
@@ -447,7 +455,7 @@ def gen_date(data, date_key, output_dir):
                 {tag_html}
                 {events_html}
             </div>\n'''
-    
+
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -470,10 +478,9 @@ def gen_date(data, date_key, output_dir):
     </div>
 </body>
 </html>'''
-    
+
     with open(output_dir / f'date-{date_key}.html', 'w', encoding='utf-8') as f:
         f.write(html)
-
 
 def gen_knockout(data, output_dir):
     """生成淘汰赛页面"""
@@ -501,10 +508,10 @@ body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background: li
 .footer { text-align: center; color: #666; padding: 20px; margin-top: 30px; }
 @media (max-width: 768px) { .match-grid { grid-template-columns: 1fr; } }
 </style>'''
-    
+
     ko = data['knockout']
     stages_html = ''
-    
+
     for stage_key in ['round16', 'round8', 'quarter', 'semi', 'third', 'final']:
         s = ko[stage_key]
         badge_class = 'final-badge' if stage_key == 'final' else ''
@@ -522,13 +529,13 @@ body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background: li
                     {score_html}
                     {'<div style="margin-top:12px;color:#ffd700;font-weight:bold;">📍 ' + ko['final'].get('venue','纽约大都会人寿体育场') + '</div>' if stage_key == 'final' else ''}
                 </div>\n'''
-        
+
         stages_html += f'''        <div class="stage-section">
             <div class="stage-title"><span class="stage-badge {badge_class}">{s['icon']} {s['label']}</span> {s['dates']}</div>
             <div class="match-grid">
 {matches_html}            </div>
         </div>\n'''
-    
+
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -549,41 +556,39 @@ body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background: li
     </div>
 </body>
 </html>'''
-    
+
     with open(output_dir / 'knockout.html', 'w', encoding='utf-8') as f:
         f.write(html)
-
 
 def gen_all(data_path=None):
     """生成所有 HTML 页面"""
     if data_path is None:
         data_path = PROJECT_DIR / 'data' / 'matches.json'
-    
+
     with open(str(data_path), 'r', encoding='utf-8') as f:
         data = json.load(f)
-    
+
     # 输出到 world_cup/ 目录
     output_dir = PROJECT_DIR / 'world_cup'
     output_dir.mkdir(parents=True, exist_ok=True)
-    
+
     print(f"🏗️  从 {data_path} 生成 HTML...")
     print(f"   输出目录: {output_dir}\n")
-    
+
     gen_index(data, output_dir)
-    
+
     for g in 'ABCDEFGHIJKL':
         gen_group(data, g, output_dir)
         print(f"  ✅ group-{g.lower()}.html")
-    
+
     for key in sorted(data['dates'].keys()):
         gen_date(data, key, output_dir)
         print(f"  ✅ date-{key}.html")
-    
+
     gen_knockout(data, output_dir)
     print(f"  ✅ knockout.html")
-    
-    print(f"\n✅ 完成！共生成 {1 + 12 + len(data['dates']) + 1} 个 HTML 文件")
 
+    print(f"\n✅ 完成！共生成 {1 + 12 + len(data['dates']) + 1} 个 HTML 文件")
 
 if __name__ == '__main__':
     gen_all()
