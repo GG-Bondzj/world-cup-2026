@@ -5,6 +5,8 @@ on:
     branches: [master]
     paths:
       - 'world_cup/**'
+      - 'data/**'
+      - 'scripts/**'
       - '*.html'
   workflow_dispatch:
 
@@ -27,12 +29,22 @@ jobs:
       - name: 检出代码
         uses: actions/checkout@v4
 
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: 生成HTML
+        run: |
+          python scripts/generate_html.py
+          echo "✅ 已生成 $(ls world_cup/*.html | wc -l) 个页面文件"
+
       - name: 准备发布目录
         run: |
           mkdir -p _site
           cp world_cup/*.html _site/
           touch _site/.nojekyll
-          echo "✅ 已复制 $(ls _site/*.html | wc -l) 个页面文件"
+          echo "✅ 已复制到发布目录"
 
       - name: 上传 Pages Artifact
         uses: actions/upload-pages-artifact@v3
