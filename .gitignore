@@ -1,0 +1,13 @@
+.git
+*.log
+node_modules/
+.DS_Store
+qly_*.js
+*.xlsx
+*.docx
+*参考资料.md
+world_cup_2026.html
+screenshot.png
+md2docx.py
+build_docx.py
+nul

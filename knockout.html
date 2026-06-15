@@ -5,373 +5,348 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>淘汰赛阶段 - 2026年美加墨世界杯</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); min-height: 100vh; color: #fff; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-        .header { text-align: center; padding: 40px 20px; background: linear-gradient(90deg, rgba(255,215,0,0.2), rgba(255,140,0,0.2)); border-radius: 20px; margin-bottom: 30px; }
-        .header h1 { font-size: 2.5em; background: linear-gradient(90deg, #ffd700, #ff8c00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; }
-        .back-link { display: inline-block; margin-bottom: 20px; color: #ffd700; text-decoration: none; padding: 8px 16px; background: rgba(255,215,0,0.1); border-radius: 8px; }
-        .back-link:hover { background: rgba(255,215,0,0.2); }
-        
-        /* 晋级之路通用样式 */
-        .promotion-road {
-            background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
-            border-radius: 16px;
-            padding: 25px;
-            margin-bottom: 30px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-        .promotion-title {
-            font-size: 1.3em;
-            color: #ffd700;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .promotion-title .stage-badge {
-            background: linear-gradient(135deg, #ffd700, #ff8c00);
-            color: #1a1a2e;
-            padding: 4px 12px;
-            border-radius: 15px;
-            font-size: 0.75em;
-            font-weight: bold;
-        }
-        .teams-grid {
-            display: grid;
-            gap: 12px;
-        }
-        .team-slot {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: rgba(0,0,0,0.3);
-            padding: 15px 20px;
-            border-radius: 10px;
-            border: 2px dashed rgba(255,255,255,0.2);
-            min-height: 60px;
-        }
-        .team-slot.filled {
-            border: 2px solid #4ade80;
-            background: rgba(74, 222, 128, 0.1);
-        }
-        .team-slot .team-name {
-            font-size: 1.1em;
-            font-weight: bold;
-        }
-        .team-slot .team-name.tbd {
-            color: #666;
-            font-weight: normal;
-        }
-        .team-slot .match-result {
-            font-size: 0.9em;
-            color: #4ade80;
-        }
-        .team-slot .position-label {
-            font-size: 0.8em;
-            color: #888;
-            background: rgba(255,255,255,0.1);
-            padding: 3px 10px;
-            border-radius: 12px;
-        }
-        
-        /* 1/8决赛特殊样式 - 16强之路 */
-        .road-16 .teams-grid {
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        }
-        
-        /* 1/4决赛特殊样式 - 8强之路 */
-        .road-8 .teams-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        
-        /* 半决赛特殊样式 - 4强之路 */
-        .road-4 .teams-grid {
-            grid-template-columns: repeat(2, 1fr);
-        }
-        .road-4 .team-slot {
-            justify-content: center;
-            flex-direction: column;
-            gap: 8px;
-            text-align: center;
-        }
-        
-        /* 决赛特殊样式 */
-        .road-final .teams-grid {
-            grid-template-columns: 1fr auto 1fr;
-            align-items: center;
-            gap: 20px;
-        }
-        .road-final .team-slot {
-            flex-direction: column;
-            gap: 10px;
-            min-height: 100px;
-        }
-        .road-final .final-vs {
-            font-size: 2em;
-            font-weight: bold;
-            color: #ffd700;
-            text-align: center;
-        }
-        .road-final .champion-cup {
-            font-size: 3em;
-            text-align: center;
-            margin-top: 10px;
-        }
-        .road-final .final-info {
-            text-align: center;
-            color: #888;
-            font-size: 0.9em;
-            margin-top: 15px;
-        }
-        
-        .stage-section { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 25px; margin-bottom: 20px; }
-        .stage-title { color: #ffd700; font-size: 1.5em; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(255,215,0,0.3); display: flex; align-items: center; gap: 10px; }
-        .stage-badge { background: linear-gradient(135deg, #ffd700, #ff8c00); color: #1a1a2e; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; font-weight: bold; }
-        .match-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 15px; }
-        .match-item { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; border-left: 4px solid #7F77DD; }
-        .match-item.highlight { border-left-color: #D85A30; background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,100,0,0.1)); }
-        .match-item.final { border-left-color: #ffd700; background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,140,0,0.15)); }
-        .match-time { color: #ffd700; font-weight: bold; margin-bottom: 12px; font-size: 0.95em; }
-        .match-teams { display: flex; justify-content: space-between; align-items: center; font-size: 1.1em; }
-        .match-vs { color: #888; font-size: 0.85em; }
-        .match-score { font-size: 1.3em; font-weight: bold; color: #4ade80; margin-left: 15px; }
-        .match-score.pending { color: #666; font-size: 0.9em; }
-        .winner { color: #4ade80; font-weight: bold; }
-        
-        .footer { text-align: center; color: #666; padding: 20px; margin-top: 30px; }
-        
-        /* 响应式 */
-        @media (max-width: 768px) {
-            .road-8 .teams-grid, .road-4 .teams-grid {
-                grid-template-columns: 1fr;
-            }
-            .road-final .teams-grid {
-                grid-template-columns: 1fr;
-            }
-            .road-final .final-vs {
-                transform: rotate(90deg);
-                margin: 10px 0;
-            }
-        }
-    </style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); min-height: 100vh; color: #fff; }
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+.header { text-align: center; padding: 40px 20px; background: linear-gradient(90deg, rgba(255,215,0,0.2), rgba(255,140,0,0.2)); border-radius: 20px; margin-bottom: 30px; }
+.header h1 { font-size: 2.5em; background: linear-gradient(90deg, #ffd700, #ff8c00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #ffd700; text-decoration: none; padding: 8px 16px; background: rgba(255,215,0,0.1); border-radius: 8px; }
+.back-link:hover { background: rgba(255,215,0,0.2); }
+.stage-section { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 25px; margin-bottom: 20px; }
+.stage-title { color: #ffd700; font-size: 1.5em; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(255,215,0,0.3); display: flex; align-items: center; gap: 10px; }
+.stage-badge { background: linear-gradient(135deg, #ffd700, #ff8c00); color: #1a1a2e; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; font-weight: bold; }
+.final-badge { background: linear-gradient(135deg, #ffd700, #ff4500); }
+.match-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+.match-item { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; border-left: 4px solid #7F77DD; }
+.match-item.highlight { border-left-color: #D85A30; background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,100,0,0.1)); }
+.match-item.final-item { border-left-color: #ffd700; background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,140,0,0.15)); }
+.match-time { color: #ffd700; font-weight: bold; margin-bottom: 12px; font-size: 0.95em; }
+.match-teams { display: flex; justify-content: space-between; align-items: center; font-size: 1.1em; }
+.match-vs { color: #888; font-size: 0.85em; }
+.match-score { font-size: 1.3em; font-weight: bold; color: #4ade80; margin-left: 15px; }
+.match-score.pending { color: #666; font-size: 0.9em; }
+.footer { text-align: center; color: #666; padding: 20px; margin-top: 30px; }
+@media (max-width: 768px) { .match-grid { grid-template-columns: 1fr; } }
+</style>
 </head>
 <body>
     <div class="container">
         <a href="index.html" class="back-link">← 返回首页</a>
-        
-        <div class="header">
-            <h1>🏆 淘汰赛阶段</h1>
-        </div>
-        
-        <!-- 决赛之路 -->
-        <div class="promotion-road road-final" id="final">
-            <div class="promotion-title">
-                <span class="stage-badge" style="background: linear-gradient(135deg, #ffd700, #ff4500);">🏆 决赛</span>
-                冠军之路
-            </div>
-            <div class="teams-grid">
-                <div class="team-slot" id="final-team1-slot">
-                    <span class="position-label">半决赛胜者 1</span>
-                    <span class="team-name tbd" id="final-team1">待定</span>
-                    <span class="match-result" id="final-result1"></span>
-                </div>
-                <div>
-                    <div class="final-vs">VS</div>
-                    <div class="champion-cup">🏆</div>
-                </div>
-                <div class="team-slot" id="final-team2-slot">
-                    <span class="position-label">半决赛胜者 2</span>
-                    <span class="team-name tbd" id="final-team2">待定</span>
-                    <span class="match-result" id="final-result2"></span>
-                </div>
-            </div>
-            <div class="final-info">
-                7月20日 03:00 · 纽约大都会人寿体育场
-            </div>
-        </div>
-        
-        <!-- 半决赛之路 -->
-        <div class="promotion-road road-4" id="semi">
-            <div class="promotion-title">
-                <span class="stage-badge">半决赛</span>
-                4强之路
-            </div>
-            <div class="teams-grid">
-                <div class="team-slot" id="semi-team1-slot">
-                    <span class="team-name tbd" id="semi-team1">待定</span>
-                    <span class="position-label">1/4决赛 胜者 1</span>
-                </div>
-                <div class="team-slot" id="semi-team2-slot">
-                    <span class="team-name tbd" id="semi-team2">待定</span>
-                    <span class="position-label">1/4决赛 胜者 2</span>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 15px; color: #888;">
-                <span style="margin: 0 20px;">7月15日 03:00</span>
-                <span style="margin: 0 20px;">7月16日 03:00</span>
-            </div>
-        </div>
-        
-        <!-- 1/4决赛之路 -->
-        <div class="promotion-road road-8" id="quarter">
-            <div class="promotion-title">
-                <span class="stage-badge">1/4</span>
-                8强之路
-            </div>
-            <div class="teams-grid">
-                <div class="team-slot" id="quarter-team1-slot">
-                    <span class="team-name tbd" id="quarter-team1">待定</span>
-                    <span class="position-label">1/8决赛 胜者 1</span>
-                </div>
-                <div class="team-slot" id="quarter-team2-slot">
-                    <span class="team-name tbd" id="quarter-team2">待定</span>
-                    <span class="position-label">1/8决赛 胜者 2</span>
-                </div>
-                <div class="team-slot" id="quarter-team3-slot">
-                    <span class="team-name tbd" id="quarter-team3">待定</span>
-                    <span class="position-label">1/8决赛 胜者 3</span>
-                </div>
-                <div class="team-slot" id="quarter-team4-slot">
-                    <span class="team-name tbd" id="quarter-team4">待定</span>
-                    <span class="position-label">1/8决赛 胜者 4</span>
-                </div>
-            </div>
-            <div style="text-align: center; margin-top: 15px; color: #888;">
-                <span style="margin: 0 15px;">7月10日</span>
-                <span style="margin: 0 15px;">7月11日</span>
-            </div>
-        </div>
-        
-        <!-- 1/8决赛之路 -->
-        <div class="promotion-road road-16" id="round8">
-            <div class="promotion-title">
-                <span class="stage-badge">1/8</span>
-                16强之路
-            </div>
-            <div class="teams-grid">
-                <div class="team-slot" id="round8-team1-slot">
-                    <span class="team-name tbd" id="round8-team1">待定</span>
-                    <span class="position-label">1/16决赛 胜者 1</span>
-                </div>
-                <div class="team-slot" id="round8-team2-slot">
-                    <span class="team-name tbd" id="round8-team2">待定</span>
-                    <span class="position-label">1/16决赛 胜者 2</span>
-                </div>
-                <div class="team-slot" id="round8-team3-slot">
-                    <span class="team-name tbd" id="round8-team3">待定</span>
-                    <span class="position-label">1/16决赛 胜者 3</span>
-                </div>
-                <div class="team-slot" id="round8-team4-slot">
-                    <span class="team-name tbd" id="round8-team4">待定</span>
-                    <span class="position-label">1/16决赛 胜者 4</span>
-                </div>
-                <div class="team-slot" id="round8-team5-slot">
-                    <span class="team-name tbd" id="round8-team5">待定</span>
-                    <span class="position-label">1/16决赛 胜者 5</span>
-                </div>
-                <div class="team-slot" id="round8-team6-slot">
-                    <span class="team-name tbd" id="round8-team6">待定</span>
-                    <span class="position-label">1/16决赛 胜者 6</span>
-                </div>
-                <div class="team-slot" id="round8-team7-slot">
-                    <span class="team-name tbd" id="round8-team7">待定</span>
-                    <span class="position-label">1/16决赛 胜者 7</span>
-                </div>
-                <div class="team-slot" id="round8-team8-slot">
-                    <span class="team-name tbd" id="round8-team8">待定</span>
-                    <span class="position-label">1/16决赛 胜者 8</span>
-                </div>
-            </div>
-        </div>
-        
-        <!-- 详细赛程 -->
-        <div class="stage-section" id="schedule">
-            <div class="stage-title">📋 详细赛程</div>
-            
-            <!-- 1/16决赛 -->
-            <div style="margin-bottom: 30px;" id="round16">
-                <div class="stage-title" style="font-size: 1.2em;"><span class="stage-badge">1/16</span> 1/16决赛 (6月29日 - 7月4日)</div>
-                <div class="match-grid">
-                    <div class="match-item"><div class="match-time">6月29日 03:00</div><div class="match-teams"><span>A组第1</span><span class="match-vs">vs</span><span>B组第2</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">6月29日 08:00</div><div class="match-teams"><span>B组第1</span><span class="match-vs">vs</span><span>A组第2</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">6月30日 03:00</div><div class="match-teams"><span>C组第1</span><span class="match-vs">vs</span><span>D组第2</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">6月30日 08:00</div><div class="match-teams"><span>D组第1</span><span class="match-vs">vs</span><span>C组第2</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月1日 03:00</div><div class="match-teams"><span>E组第1</span><span class="match-vs">vs</span><span>F组第2</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月1日 08:00</div><div class="match-teams"><span>F组第1</span><span class="match-vs">vs</span><span>E组第2</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月2日 03:00</div><div class="match-teams"><span>G组第1</span><span class="match-vs">vs</span><span>H组第2</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月2日 08:00</div><div class="match-teams"><span>H组第1</span><span class="match-vs">vs</span><span>G组第2</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月3日 03:00</div><div class="match-teams"><span>I组第1</span><span class="match-vs">vs</span><span>J组第2</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月3日 08:00</div><div class="match-teams"><span>J组第1</span><span class="match-vs">vs</span><span>I组第2</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月4日 03:00</div><div class="match-teams"><span>K组第1</span><span class="match-vs">vs</span><span>L组第2</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月4日 08:00</div><div class="match-teams"><span>L组第1</span><span class="match-vs">vs</span><span>K组第2</span></div><div class="match-score pending">等待开赛</div></div>
-                </div>
-            </div>
-            
-            <!-- 1/8决赛 -->
-            <div style="margin-bottom: 30px;">
-                <div class="stage-title" style="font-size: 1.2em;"><span class="stage-badge">1/8</span> 1/8决赛 (7月5日 - 7月8日)</div>
-                <div class="match-grid">
-                    <div class="match-item"><div class="match-time">7月5日 03:00</div><div class="match-teams"><span>胜者1</span><span class="match-vs">vs</span><span>胜者2</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月5日 08:00</div><div class="match-teams"><span>胜者3</span><span class="match-vs">vs</span><span>胜者4</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月6日 03:00</div><div class="match-teams"><span>胜者5</span><span class="match-vs">vs</span><span>胜者6</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月6日 08:00</div><div class="match-teams"><span>胜者7</span><span class="match-vs">vs</span><span>胜者8</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月7日 03:00</div><div class="match-teams"><span>胜者9</span><span class="match-vs">vs</span><span>胜者10</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月7日 08:00</div><div class="match-teams"><span>胜者11</span><span class="match-vs">vs</span><span>胜者12</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月8日 03:00</div><div class="match-teams"><span>胜者13</span><span class="match-vs">vs</span><span>胜者14</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月8日 08:00</div><div class="match-teams"><span>胜者15</span><span class="match-vs">vs</span><span>胜者16</span></div><div class="match-score pending">等待开赛</div></div>
-                </div>
-            </div>
-            
-            <!-- 1/4决赛 -->
-            <div style="margin-bottom: 30px;">
-                <div class="stage-title" style="font-size: 1.2em;"><span class="stage-badge">1/4</span> 1/4决赛 (7月10日 - 7月12日)</div>
-                <div class="match-grid">
-                    <div class="match-item"><div class="match-time">7月10日 03:00</div><div class="match-teams"><span>1/8胜者1</span><span class="match-vs">vs</span><span>1/8胜者2</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月10日 08:00</div><div class="match-teams"><span>1/8胜者3</span><span class="match-vs">vs</span><span>1/8胜者4</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月11日 03:00</div><div class="match-teams"><span>1/8胜者5</span><span class="match-vs">vs</span><span>1/8胜者6</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item"><div class="match-time">7月11日 08:00</div><div class="match-teams"><span>1/8胜者7</span><span class="match-vs">vs</span><span>1/8胜者8</span></div><div class="match-score pending">等待开赛</div></div>
-                </div>
-            </div>
-            
-            <!-- 半决赛 -->
-            <div style="margin-bottom: 30px;">
-                <div class="stage-title" style="font-size: 1.2em;"><span class="stage-badge">半决赛</span> 半决赛 (7月15日 - 7月16日)</div>
-                <div class="match-grid">
-                    <div class="match-item highlight"><div class="match-time">7月15日 03:00</div><div class="match-teams"><span>1/4胜者1</span><span class="match-vs">vs</span><span>1/4胜者2</span></div><div class="match-score pending">等待开赛</div></div>
-                    <div class="match-item highlight"><div class="match-time">7月16日 03:00</div><div class="match-teams"><span>1/4胜者3</span><span class="match-vs">vs</span><span>1/4胜者4</span></div><div class="match-score pending">等待开赛</div></div>
-                </div>
-            </div>
-            
-            <!-- 季军赛 -->
-            <div style="margin-bottom: 30px;">
-                <div class="stage-title" style="font-size: 1.2em;"><span class="stage-badge">季军赛</span> 季军赛 (7月19日)</div>
-                <div class="match-grid">
-                    <div class="match-item"><div class="match-time">7月19日 03:00</div><div class="match-teams"><span>半决赛负者1</span><span class="match-vs">vs</span><span>半决赛负者2</span></div><div class="match-score pending">等待开赛</div></div>
-                </div>
-            </div>
-            
-            <!-- 决赛 -->
-            <div style="margin-bottom: 30px;">
-                <div class="stage-title" style="font-size: 1.2em;"><span class="stage-badge" style="background: linear-gradient(135deg, #ffd700, #ff4500);">🏆 决赛</span> 决赛 (7月20日)</div>
-                <div class="match-grid">
-                    <div class="match-item final">
-                        <div class="match-time">7月20日 03:00 🏆</div>
-                        <div class="match-teams">
-                            <span>半决赛胜者1</span>
-                            <span class="match-vs">vs</span>
-                            <span>半决赛胜者2</span>
-                        </div>
-                        <div class="match-score pending">等待开赛</div>
-                        <div style="margin-top: 12px; color: #ffd700; font-weight: bold;">📍 纽约大都会人寿体育场</div>
+        <div class="header"><h1>🏆 淘汰赛阶段</h1></div>
+        <div class="stage-section">
+            <div class="stage-title"><span class="stage-badge ">⚔️ 1/16决赛</span> 6月29日 - 7月4日</div>
+            <div class="match-grid">
+                <div class="match-item " id="round16">
+                    <div class="match-time">6月29日 03:00</div>
+                    <div class="match-teams">
+                        <span>A组第1</span>
+                        <span class="match-vs">vs</span>
+                        <span>B组第2</span>
                     </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round16">
+                    <div class="match-time">6月29日 08:00</div>
+                    <div class="match-teams">
+                        <span>B组第1</span>
+                        <span class="match-vs">vs</span>
+                        <span>A组第2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round16">
+                    <div class="match-time">6月30日 03:00</div>
+                    <div class="match-teams">
+                        <span>C组第1</span>
+                        <span class="match-vs">vs</span>
+                        <span>D组第2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round16">
+                    <div class="match-time">6月30日 08:00</div>
+                    <div class="match-teams">
+                        <span>D组第1</span>
+                        <span class="match-vs">vs</span>
+                        <span>C组第2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round16">
+                    <div class="match-time">7月1日 03:00</div>
+                    <div class="match-teams">
+                        <span>E组第1</span>
+                        <span class="match-vs">vs</span>
+                        <span>F组第2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round16">
+                    <div class="match-time">7月1日 08:00</div>
+                    <div class="match-teams">
+                        <span>F组第1</span>
+                        <span class="match-vs">vs</span>
+                        <span>E组第2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round16">
+                    <div class="match-time">7月2日 03:00</div>
+                    <div class="match-teams">
+                        <span>G组第1</span>
+                        <span class="match-vs">vs</span>
+                        <span>H组第2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round16">
+                    <div class="match-time">7月2日 08:00</div>
+                    <div class="match-teams">
+                        <span>H组第1</span>
+                        <span class="match-vs">vs</span>
+                        <span>G组第2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round16">
+                    <div class="match-time">7月3日 03:00</div>
+                    <div class="match-teams">
+                        <span>I组第1</span>
+                        <span class="match-vs">vs</span>
+                        <span>J组第2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round16">
+                    <div class="match-time">7月3日 08:00</div>
+                    <div class="match-teams">
+                        <span>J组第1</span>
+                        <span class="match-vs">vs</span>
+                        <span>I组第2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round16">
+                    <div class="match-time">7月4日 03:00</div>
+                    <div class="match-teams">
+                        <span>K组第1</span>
+                        <span class="match-vs">vs</span>
+                        <span>L组第2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round16">
+                    <div class="match-time">7月4日 08:00</div>
+                    <div class="match-teams">
+                        <span>L组第1</span>
+                        <span class="match-vs">vs</span>
+                        <span>K组第2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
                 </div>
             </div>
         </div>
-        
+        <div class="stage-section">
+            <div class="stage-title"><span class="stage-badge ">🎯 1/8决赛</span> 7月5日 - 7月8日</div>
+            <div class="match-grid">
+                <div class="match-item " id="round8">
+                    <div class="match-time">7月5日 03:00</div>
+                    <div class="match-teams">
+                        <span>1/16胜者1</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/16胜者2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round8">
+                    <div class="match-time">7月5日 08:00</div>
+                    <div class="match-teams">
+                        <span>1/16胜者3</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/16胜者4</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round8">
+                    <div class="match-time">7月6日 03:00</div>
+                    <div class="match-teams">
+                        <span>1/16胜者5</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/16胜者6</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round8">
+                    <div class="match-time">7月6日 08:00</div>
+                    <div class="match-teams">
+                        <span>1/16胜者7</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/16胜者8</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round8">
+                    <div class="match-time">7月7日 03:00</div>
+                    <div class="match-teams">
+                        <span>1/16胜者9</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/16胜者10</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round8">
+                    <div class="match-time">7月7日 08:00</div>
+                    <div class="match-teams">
+                        <span>1/16胜者11</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/16胜者12</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round8">
+                    <div class="match-time">7月8日 03:00</div>
+                    <div class="match-teams">
+                        <span>1/16胜者13</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/16胜者14</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="round8">
+                    <div class="match-time">7月8日 08:00</div>
+                    <div class="match-teams">
+                        <span>1/16胜者15</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/16胜者16</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="stage-section">
+            <div class="stage-title"><span class="stage-badge ">💎 1/4决赛</span> 7月10日 - 7月12日</div>
+            <div class="match-grid">
+                <div class="match-item " id="quarter">
+                    <div class="match-time">7月10日 03:00</div>
+                    <div class="match-teams">
+                        <span>1/8胜者1</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/8胜者2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="quarter">
+                    <div class="match-time">7月10日 08:00</div>
+                    <div class="match-teams">
+                        <span>1/8胜者3</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/8胜者4</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="quarter">
+                    <div class="match-time">7月11日 03:00</div>
+                    <div class="match-teams">
+                        <span>1/8胜者5</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/8胜者6</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item " id="quarter">
+                    <div class="match-time">7月11日 08:00</div>
+                    <div class="match-teams">
+                        <span>1/8胜者7</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/8胜者8</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="stage-section">
+            <div class="stage-title"><span class="stage-badge ">🌟 半决赛</span> 7月15日 - 7月16日</div>
+            <div class="match-grid">
+                <div class="match-item highlight" id="semi">
+                    <div class="match-time">7月15日 03:00</div>
+                    <div class="match-teams">
+                        <span>1/4胜者1</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/4胜者2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+                <div class="match-item highlight" id="semi">
+                    <div class="match-time">7月16日 03:00</div>
+                    <div class="match-teams">
+                        <span>1/4胜者3</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/4胜者4</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="stage-section">
+            <div class="stage-title"><span class="stage-badge ">🥉 季军赛</span> 7月19日</div>
+            <div class="match-grid">
+                <div class="match-item " id="third">
+                    <div class="match-time">7月19日 03:00</div>
+                    <div class="match-teams">
+                        <span>半决赛负者1</span>
+                        <span class="match-vs">vs</span>
+                        <span>半决赛负者2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="stage-section">
+            <div class="stage-title"><span class="stage-badge final-badge">🏆 决赛</span> 7月20日</div>
+            <div class="match-grid">
+                <div class="match-item final-item" id="final">
+                    <div class="match-time">7月20日 03:00 🏆</div>
+                    <div class="match-teams">
+                        <span>半决赛胜者1</span>
+                        <span class="match-vs">vs</span>
+                        <span>半决赛胜者2</span>
+                    </div>
+                    <span class="match-score pending">等待开赛</span>
+                    <div style="margin-top:12px;color:#ffd700;font-weight:bold;">📍 纽约大都会人寿体育场</div>
+                </div>
+            </div>
+        </div>
+
         <div class="footer">
             <p>📌 赛事时间可能存在调整，请以官方最新公布为准</p>
-            <p>🔄 每日下午5点自动更新</p>
+            <p>🔄 每日自动更新</p>
         </div>
     </div>
 </body>

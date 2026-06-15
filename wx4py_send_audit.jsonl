@@ -1,0 +1,7 @@
+{"run_id":"bd85d8ed-6c0b-4757-bdea-f3e438e42bd6","target":"朱劲","attempt":1,"phase":"open","success":true,"exception_type":"","exception_msg":"","elapsed_ms":6680}
+{"run_id":"bd85d8ed-6c0b-4757-bdea-f3e438e42bd6","target":"朱劲","attempt":1,"phase":"send","success":true,"exception_type":"","exception_msg":"","elapsed_ms":3598}
+{"run_id":"aa32f1a9-a402-42fb-a808-f4cbda9a940e","target":"哇！🚒","attempt":1,"phase":"open","success":false,"exception_type":"TargetNotFoundError","exception_msg":"'哇！🚒' not found in '联系人' group","elapsed_ms":5287}
+{"run_id":"42085f3f-e651-44f0-acc0-520942bccf89","target":"哇","attempt":1,"phase":"open","success":true,"exception_type":"","exception_msg":"","elapsed_ms":6137}
+{"run_id":"42085f3f-e651-44f0-acc0-520942bccf89","target":"哇","attempt":1,"phase":"send","success":true,"exception_type":"","exception_msg":"","elapsed_ms":3379}
+{"run_id":"d01e6a3a-a0f0-4ff2-a234-8cadf67d8c7b","target":"哇","attempt":1,"phase":"open","success":true,"exception_type":"","exception_msg":"","elapsed_ms":6120}
+{"run_id":"d01e6a3a-a0f0-4ff2-a234-8cadf67d8c7b","target":"哇","attempt":1,"phase":"send","success":true,"exception_type":"","exception_msg":"","elapsed_ms":3385}
