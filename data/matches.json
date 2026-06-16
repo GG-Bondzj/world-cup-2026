@@ -503,25 +503,31 @@
       ],
       "matches": [
         {
-          "status": "pending",
-          "time": "6月16日 03:00",
+          "status": "finished",
+          "time": "6月16日 03:00 ✅ 已结束",
           "month": 6,
           "day": 16,
           "kickoff": "03:00",
           "home": "🇧🇪 比利时",
           "away": "埃及 🇪🇬",
           "venue": "📍 西雅图",
+          "score_home": 1,
+          "score_away": 1,
+          "events": "进球：埃及：阿舒尔(19') | 比利时：哈尼乌龙球(66'卢卡库造)",
           "group": "G组"
         },
         {
-          "status": "pending",
-          "time": "6月16日 09:00",
+          "status": "finished",
+          "time": "6月16日 09:00 ✅ 已结束",
           "month": 6,
           "day": 16,
           "kickoff": "09:00",
           "home": "🇮🇷 伊朗",
           "away": "新西兰 🇳🇿",
           "venue": "📍 洛杉矶",
+          "score_home": 2,
+          "score_away": 2,
+          "events": "进球：礼萨扬(32')、穆希比(64') | 新西兰：贾斯特(7'、55')",
           "group": "G组"
         },
         {
@@ -579,25 +585,31 @@
       ],
       "matches": [
         {
-          "status": "pending",
-          "time": "6月16日 00:00",
+          "status": "finished",
+          "time": "6月16日 00:00 ✅ 已结束",
           "month": 6,
           "day": 16,
           "kickoff": "00:00",
           "home": "🇪🇸 西班牙",
           "away": "佛得角 🇨🇻",
           "venue": "📍 亚特兰大",
+          "score_home": 0,
+          "score_away": 0,
+          "events": "冷门！西班牙27射0球，佛得角门将沃齐尼亚7次扑救力保首分",
           "group": "H组"
         },
         {
-          "status": "pending",
-          "time": "6月16日 06:00",
+          "status": "finished",
+          "time": "6月16日 06:00 ✅ 已结束",
           "month": 6,
           "day": 16,
           "kickoff": "06:00",
           "home": "🇸🇦 沙特",
           "away": "乌拉圭 🇺🇾",
           "venue": "📍 迈阿密",
+          "score_home": 1,
+          "score_away": 1,
+          "events": "进球：阿姆里(41'补射) | 乌拉圭：阿劳霍(80')",
           "group": "H组"
         },
         {
@@ -1090,32 +1102,40 @@
     "0616": {
       "matches": [
         {
-          "status": "pending",
-          "time": "00:00",
+          "status": "finished",
+          "time": "00:00 ✅ 已结束",
           "home": "🇪🇸 西班牙",
           "away": "佛得角 🇨🇻",
-          "group": "H组"
+          "group": "H组",
+          "score_home": 0,
+          "score_away": 0
         },
         {
-          "status": "pending",
-          "time": "03:00",
+          "status": "finished",
+          "time": "03:00 ✅ 已结束",
           "home": "🇧🇪 比利时",
           "away": "埃及 🇪🇬",
-          "group": "G组"
+          "group": "G组",
+          "score_home": 1,
+          "score_away": 1
         },
         {
-          "status": "pending",
-          "time": "06:00",
+          "status": "finished",
+          "time": "06:00 ✅ 已结束",
           "home": "🇸🇦 沙特",
           "away": "乌拉圭 🇺🇾",
-          "group": "H组"
+          "group": "H组",
+          "score_home": 1,
+          "score_away": 1
         },
         {
-          "status": "pending",
-          "time": "09:00",
+          "status": "finished",
+          "time": "09:00 ✅ 已结束",
           "home": "🇮🇷 伊朗",
           "away": "新西兰 🇳🇿",
-          "group": "G组"
+          "group": "G组",
+          "score_home": 2,
+          "score_away": 2
         }
       ]
     },
