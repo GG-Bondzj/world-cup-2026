@@ -744,26 +744,33 @@
           "events": "进球：哈兰德(29'、43')、厄斯蒂高(76')、侯赛因乌龙 | 伊拉克：艾曼·侯赛因(39'头球)"
         },
         {
-          "status": "pending",
-          "time": "6月23日 05:00",
+          "status": "finished",
+          "time": "6月23日 05:00 ✅ 已结束",
           "month": 6,
           "day": 23,
           "kickoff": "05:00",
           "home": "🇫🇷 法国",
           "away": "伊拉克 🇮🇶",
           "venue": "📍 费城",
-          "group": "I组"
+          "highlight": true,
+          "group": "I组",
+          "score_home": 3,
+          "score_away": 0,
+          "events": "进球：姆巴佩(14'世界波、54'推射) — 世界杯16球追平克洛泽 | 登贝莱(66'劲射)传射 | 下半场因雷雨推迟2小时 | 法国两连胜提前出线"
         },
         {
-          "status": "pending",
-          "time": "6月23日 08:00",
+          "status": "finished",
+          "time": "6月23日 08:00 ✅ 已结束",
           "month": 6,
           "day": 23,
           "kickoff": "08:00",
           "home": "🇳🇴 挪威",
           "away": "塞内加尔 🇸🇳",
           "venue": "📍 纽约",
-          "group": "I组"
+          "group": "I组",
+          "score_home": 3,
+          "score_away": 2,
+          "events": "进球：彼得森(43')、哈兰德(下半场双响梅开二度) | 塞内加尔：萨尔(下半场两球) | 挪威两连胜提前出线 — 时隔28年重返世界杯即晋级！"
         },
         {
           "status": "pending",
@@ -828,26 +835,33 @@
           "events": "进球：施密德(21')、鲍姆加特纳、阿瑙托维奇 | 约旦：阿尔纳迈特"
         },
         {
-          "status": "pending",
-          "time": "6月23日 01:00",
+          "status": "finished",
+          "time": "6月23日 01:00 ✅ 已结束",
           "month": 6,
           "day": 23,
           "kickoff": "01:00",
           "home": "🇦🇷 阿根廷",
           "away": "奥地利 🇦🇹",
           "venue": "📍 达拉斯",
-          "group": "J组"
+          "highlight": true,
+          "group": "J组",
+          "score_home": 2,
+          "score_away": 0,
+          "events": "进球：梅西(38'推射、90+5'连击破门) — 世界杯18球登顶历史射手王超越克洛泽 | 8'梅西罚丢点球(劳塔罗造点) | 阿根廷两连胜提前出线"
         },
         {
-          "status": "pending",
-          "time": "6月23日 11:00",
+          "status": "finished",
+          "time": "6月23日 11:00 ✅ 已结束",
           "month": 6,
           "day": 23,
           "kickoff": "11:00",
           "home": "🇯🇴 约旦",
           "away": "阿尔及利亚 🇩🇿",
           "venue": "📍 旧金山",
-          "group": "J组"
+          "group": "J组",
+          "score_home": 1,
+          "score_away": 2,
+          "events": "进球：约旦 尼扎尔(36'队史世界杯首球) | 阿尔及利亚：本布阿利(马赫雷斯助攻头球扳平)、古伊里(乱战制胜球) | 约旦两连败0分垫底"
         },
         {
           "status": "pending",
@@ -1458,32 +1472,44 @@
     "0623": {
       "matches": [
         {
-          "status": "pending",
-          "time": "01:00",
+          "status": "finished",
+          "time": "01:00 ✅ 已结束",
           "home": "🇦🇷 阿根廷",
           "away": "奥地利 🇦🇹",
-          "group": "J组"
+          "highlight": true,
+          "tag": "★ 梅西双响 登顶历史射手王",
+          "group": "J组",
+          "score_home": 2,
+          "score_away": 0
         },
         {
-          "status": "pending",
-          "time": "05:00",
+          "status": "finished",
+          "time": "05:00 ✅ 已结束",
           "home": "🇫🇷 法国",
           "away": "伊拉克 🇮🇶",
-          "group": "I组"
+          "tag": "★ 姆巴佩双响",
+          "group": "I组",
+          "score_home": 3,
+          "score_away": 0
         },
         {
-          "status": "pending",
-          "time": "08:00",
+          "status": "finished",
+          "time": "08:00 ✅ 已结束",
           "home": "🇳🇴 挪威",
           "away": "塞内加尔 🇸🇳",
-          "group": "I组"
+          "tag": "★ 哈兰德双响",
+          "group": "I组",
+          "score_home": 3,
+          "score_away": 2
         },
         {
-          "status": "pending",
-          "time": "11:00",
+          "status": "finished",
+          "time": "11:00 ✅ 已结束",
           "home": "🇯🇴 约旦",
           "away": "阿尔及利亚 🇩🇿",
-          "group": "J组"
+          "group": "J组",
+          "score_home": 1,
+          "score_away": 2
         }
       ]
     },
