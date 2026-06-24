@@ -925,26 +925,33 @@
           "events": "进球：法伊祖拉耶夫(60'队史首球) | 哥伦比亚：穆尼奥斯(41')、迪亚斯(65')、坎帕斯(90+')"
         },
         {
-          "status": "pending",
-          "time": "6月24日 01:00",
+          "status": "finished",
+          "time": "6月24日 01:00 ✅ 已结束",
           "month": 6,
           "day": 24,
           "kickoff": "01:00",
           "home": "🇵🇹 葡萄牙",
           "away": "乌兹别克斯坦 🇺🇿",
           "venue": "📍 休斯顿",
-          "group": "K组"
+          "highlight": true,
+          "group": "K组",
+          "score_home": 5,
+          "score_away": 0,
+          "events": "进球：C罗(6'、39'双响)六届世界杯进球历史第一人、门德斯(17'任意球)、内马托夫乌龙(60')、莱奥(87') | 乌兹别克：甘尼耶夫进球VAR判犯规无效 | 葡萄牙4分暂列K组第二"
         },
         {
-          "status": "pending",
-          "time": "6月24日 10:00",
+          "status": "finished",
+          "time": "6月24日 10:00 ✅ 已结束",
           "month": 6,
           "day": 24,
           "kickoff": "10:00",
           "home": "🇨🇴 哥伦比亚",
           "away": "刚果金 🇨🇩",
           "venue": "📍 萨波潘",
-          "group": "K组"
+          "group": "K组",
+          "score_home": 1,
+          "score_away": 0,
+          "events": "进球：穆尼奥斯(76'变线低射) | 刚果金门将Mpasi前20分钟5次扑救 | 哥伦比亚6分提前出线！末轮与葡萄牙直接交锋争小组头名"
         },
         {
           "status": "pending",
@@ -1008,26 +1015,32 @@
           "events": "进球：加纳队破门得分"
         },
         {
-          "status": "pending",
-          "time": "6月24日 04:00",
+          "status": "finished",
+          "time": "6月24日 04:00 ✅ 已结束",
           "month": 6,
           "day": 24,
           "kickoff": "04:00",
           "home": "🏴󠁧󠁢󠁥󠁮󠁧󠁿 英格兰",
           "away": "加纳 🇬🇭",
           "venue": "📍 波士顿",
-          "group": "L组"
+          "group": "L组",
+          "score_home": 0,
+          "score_away": 0,
+          "events": "冷门！英格兰79%控球率0进球 — 60年来世界杯最高控球率0进球纪录 | 凯恩错失6码最佳机会(奥赖利头球中框弹出) | 加纳防守纪律出色力保一分"
         },
         {
-          "status": "pending",
-          "time": "6月24日 07:00",
+          "status": "finished",
+          "time": "6月24日 07:00 ✅ 已结束",
           "month": 6,
           "day": 24,
           "kickoff": "07:00",
           "home": "🇵🇦 巴拿马",
           "away": "克罗地亚 🇭🇷",
           "venue": "📍 多伦多",
-          "group": "L组"
+          "group": "L组",
+          "score_home": 0,
+          "score_away": 1,
+          "events": "进球：布迪米尔(54'替补推射破门，斯塔尼西奇助攻) | 莫德里奇200场国家队里程碑 | 巴拿马两连败0分提前出局"
         },
         {
           "status": "pending",
@@ -1516,32 +1529,42 @@
     "0624": {
       "matches": [
         {
-          "status": "pending",
-          "time": "01:00",
+          "status": "finished",
+          "time": "01:00 ✅ 已结束",
           "home": "🇵🇹 葡萄牙",
           "away": "乌兹别克斯坦 🇺🇿",
-          "group": "K组"
+          "highlight": true,
+          "tag": "★ C罗六届世界杯进球创纪录",
+          "group": "K组",
+          "score_home": 5,
+          "score_away": 0
         },
         {
-          "status": "pending",
-          "time": "04:00",
+          "status": "finished",
+          "time": "04:00 ✅ 已结束",
           "home": "🏴󠁧󠁢󠁥󠁮󠁧󠁿 英格兰",
           "away": "加纳 🇬🇭",
-          "group": "L组"
+          "group": "L组",
+          "score_home": 0,
+          "score_away": 0
         },
         {
-          "status": "pending",
-          "time": "07:00",
+          "status": "finished",
+          "time": "07:00 ✅ 已结束",
           "home": "🇵🇦 巴拿马",
           "away": "克罗地亚 🇭🇷",
-          "group": "L组"
+          "group": "L组",
+          "score_home": 0,
+          "score_away": 1
         },
         {
-          "status": "pending",
-          "time": "10:00",
+          "status": "finished",
+          "time": "10:00 ✅ 已结束",
           "home": "🇨🇴 哥伦比亚",
           "away": "刚果金 🇨🇩",
-          "group": "K组"
+          "group": "K组",
+          "score_home": 1,
+          "score_away": 0
         }
       ]
     },
