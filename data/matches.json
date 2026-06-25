@@ -1571,46 +1571,68 @@
     "0625": {
       "matches": [
         {
-          "status": "pending",
-          "time": "03:00",
+          "status": "finished",
+          "time": "03:00 ✅ 已结束",
           "home": "🇨🇦 加拿大",
           "away": "瑞士 🇨🇭",
-          "group": "B组"
+          "group": "B组",
+          "score_home": 1,
+          "score_away": 2,
+          "events": "进球：巴尔加斯(46')、曼赞比(恩博洛助攻)、戴维(替补扳回)"
         },
         {
-          "status": "pending",
-          "time": "03:00",
+          "status": "finished",
+          "time": "03:00 ✅ 已结束",
           "home": "🇶🇦 卡塔尔",
           "away": "波黑 🇧🇦",
-          "group": "B组"
+          "group": "B组",
+          "score_home": 1,
+          "score_away": 3,
+          "events": "进球：阿拉伊贝戈维奇(29'世界波，18岁创纪录)、布雷克(34'乌龙)、海多斯(42')、马赫米奇(80')"
         },
         {
-          "status": "pending",
-          "time": "06:00",
+          "status": "finished",
+          "time": "06:00 ✅ 已结束",
           "home": "🏴󠁧󠁢󠁳󠁣󠁴󠁿 苏格兰",
           "away": "巴西 🇧🇷",
-          "group": "C组"
+          "group": "C组",
+          "score_home": 0,
+          "score_away": 3,
+          "highlight": true,
+          "tag": "★ 内马尔首秀 维尼修斯双响",
+          "events": "进球：维尼修斯(7'、上半场补时)、库尼亚(60')"
         },
         {
-          "status": "pending",
-          "time": "06:00",
+          "status": "finished",
+          "time": "06:00 ✅ 已结束",
           "home": "🇲🇦 摩洛哥",
           "away": "海地 🇭🇹",
-          "group": "C组"
+          "group": "C组",
+          "score_home": 4,
+          "score_away": 2,
+          "events": "进球：阿什拉夫(扳平)、赛巴里(再扳平)、拉希米(78'反超)、亚辛(89'锁定)；海地：布努(10'乌龙)、伊西多尔(43'世界波)"
         },
         {
-          "status": "pending",
-          "time": "09:00",
+          "status": "finished",
+          "time": "09:00 ✅ 已结束",
           "home": "🇲🇽 墨西哥",
           "away": "捷克 🇨🇿",
-          "group": "A组"
+          "group": "A组",
+          "score_home": 3,
+          "score_away": 0,
+          "highlight": true,
+          "tag": "★ 墨西哥3战全胜0失球头名晋级",
+          "events": "进球：查韦斯(55')、基尼奥内斯(61')、菲达尔戈(下补时)"
         },
         {
-          "status": "pending",
-          "time": "09:00",
+          "status": "finished",
+          "time": "09:00 ✅ 已结束",
           "home": "🇰🇷 韩国",
           "away": "南非 🇿🇦",
-          "group": "A组"
+          "group": "A组",
+          "score_home": 0,
+          "score_away": 1,
+          "events": "进球：马塞科(63'低射)"
         }
       ]
     },
