@@ -255,24 +255,17 @@ def gen_index(data, output_dir):
                 )
             inner = ''.join(pair_blocks)
         else:
-            # 决赛 / 半决赛 / 季军赛单场：竖排布局，VS 居中
+            # 决赛 / 半决赛 / 季军赛单场：横排布局，与 1/4决赛 风格一致
             m = matches[0] if matches else {}
-            if is_final_round:
-                if m.get('home') and m.get('away') and not str(m['home']).startswith('胜者'):
-                    home_disp = _team_card(m['home'])
-                    away_disp = _team_card(m['away'])
-                else:
-                    home_disp = _card('待定')
-                    away_disp = _card('待定')
+            if is_final_round and m.get('home') and m.get('away') and not str(m['home']).startswith('胜者'):
+                home_disp = _team_card(m['home'])
+                away_disp = _team_card(m['away'])
             else:
                 home_disp = _card('待定')
                 away_disp = _card('待定')
-            # 竖排：上-队伍1 / 中-VS / 下-队伍2
             inner = (
-                '<div style="display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;max-width:280px;">'
-                f'<div style="display:flex;justify-content:center;width:100%;">{home_disp}</div>'
-                '<div style="font-size:1.3em;font-weight:bold;color:#ffd700;letter-spacing:2px;">VS</div>'
-                f'<div style="display:flex;justify-content:center;width:100%;">{away_disp}</div>'
+                '<div style="display:flex;align-items:center;justify-content:center;gap:10px;">'
+                f'{home_disp}{_vs()}{away_disp}'
                 '</div>'
             )
 
