@@ -482,8 +482,89 @@ def gen_date(data, date_key, output_dir):
     with open(output_dir / f'date-{date_key}.html', 'w', encoding='utf-8') as f:
         f.write(html)
 
+def _resolve_winner(m):
+    """根据比赛结果返回胜者名字（含国旗），平局/未结束返回 None"""
+    if m.get('status') != 'finished':
+        return None
+    sh = m.get('score_home')
+    sa = m.get('score_away')
+    if sh is None or sa is None:
+        return None
+    try:
+        sh = int(sh); sa = int(sa)
+    except (ValueError, TypeError):
+        return None
+    if sh == sa:
+        return None  # 淘汰赛不应平局；如出现则不晋级
+    return m['home'] if sh > sa else m['away']
+
+def _build_advancement_map(round_matches, prev_winners):
+    """根据模板的占位符（1/16胜者1..N），生成占位符->实际队伍名的映射"""
+    mapping = {}
+    for idx, m in enumerate(round_matches, 1):
+        for side in ('home', 'away'):
+            val = m.get(side, '')
+            if val in prev_winners:
+                mapping[val] = prev_winners[val]
+    return mapping
+
+def _advance_round(prev_matches):
+    """根据上一轮比赛结果，返回胜者映射 {'1/16胜者1': '🇧🇷 巴西', ...}"""
+    winners = {}
+    for idx, m in enumerate(prev_matches, 1):
+        winner = _resolve_winner(m)
+        if winner is None:
+            return {}  # 任意一场未结束则停止晋级
+        winners[f'1/16胜者{idx}'] = winner
+        winners[f'1/8胜者{idx}'] = winner
+        winners[f'1/4胜者{idx}'] = winner
+        winners[f'半决赛胜者{idx}'] = winner
+        winners[f'半决赛负者{idx}'] = winner
+    return winners
+
+def _render_ko_match(m, item_class, stage_key, finals_venue):
+    """生成单个淘汰赛比赛的 HTML 片段"""
+    status = m.get('status', 'pending')
+    time_str = m.get('time', '')
+    if status == 'finished' and '✅ 已结束' not in time_str:
+        time_display = time_str + ' ✅ 已结束'
+    else:
+        time_display = time_str
+
+    # 比分渲染
+    if status == 'finished':
+        sh = m.get('score_home', 0) or 0
+        sa = m.get('score_away', 0) or 0
+        score_html = f'<span class="match-score">{sh}-{sa}</span>'
+    else:
+        score_html = '<span class="match-score pending">等待开赛</span>'
+
+    venue_line = ''
+    if stage_key == 'final':
+        venue_line = f'<div style="margin-top:12px;color:#ffd700;font-weight:bold;">📍 {finals_venue}</div>'
+    elif m.get('venue'):
+        venue_clean = m['venue'].replace('📍 ', '').replace('📍', '').strip()
+        venue_line = f'<div class="match-venue">📍 {venue_clean}</div>'
+
+    # events 注释
+    events_html = ''
+    if m.get('events'):
+        events_html = f'<div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">{m["events"]}</div>'
+
+    return f'''                <div class="match-item {item_class}">
+                    <div class="match-time">{time_display}{' 🏆' if stage_key == 'final' else ''}</div>
+                    <div class="match-teams">
+                        <span>{m['home']}</span>
+                        <span class="match-vs">vs</span>
+                        <span>{m['away']}</span>
+                    </div>
+                    {score_html}
+                    {venue_line}
+                    {events_html}
+                </div>'''
+
 def gen_knockout(data, output_dir):
-    """生成淘汰赛页面"""
+    """生成淘汰赛页面：1/16 显示实际数据，已结束比赛按结果晋级到 1/8（8强）"""
     ko_css = '''<style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); min-height: 100vh; color: #fff; }
@@ -505,30 +586,48 @@ body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background: li
 .match-vs { color: #888; font-size: 0.85em; }
 .match-score { font-size: 1.3em; font-weight: bold; color: #4ade80; margin-left: 15px; }
 .match-score.pending { color: #666; font-size: 0.9em; }
+.match-venue { color: #888; font-size: 0.85em; margin-top: 8px; }
 .footer { text-align: center; color: #666; padding: 20px; margin-top: 30px; }
 @media (max-width: 768px) { .match-grid { grid-template-columns: 1fr; } }
 </style>'''
 
     ko = data['knockout']
+    finals_venue = ko['final'].get('venue', '纽约大都会人寿体育场')
+
+    # 计算晋级映射
+    r16_winners = _advance_round(ko['round16']['matches'])  # {'1/16胜者1': '🇿🇦 南非', ...}
+    r8_winners = _advance_round(ko['round8']['matches']) if r16_winners and len(r16_winners) >= 16 else {}
+    q_winners = _advance_round(ko['quarter']['matches']) if r8_winners and len(r8_winners) >= 8 else {}
+
     stages_html = ''
 
     for stage_key in ['round16', 'round8', 'quarter', 'semi', 'third', 'final']:
         s = ko[stage_key]
         badge_class = 'final-badge' if stage_key == 'final' else ''
+
+        # 选择本轮要使用的晋级映射
+        if stage_key == 'round16':
+            adv = r16_winners  # round16 不需要替换，但保留一致
+        elif stage_key == 'round8':
+            adv = r16_winners
+        elif stage_key == 'quarter':
+            adv = r8_winners
+        elif stage_key in ('semi', 'third', 'final'):
+            adv = q_winners
+        else:
+            adv = {}
+
         matches_html = ''
         for m in s['matches']:
-            item_class = 'final-item' if stage_key == 'final' else ('highlight' if stage_key == 'semi' else '')
-            score_html = '<span class="match-score pending">等待开赛</span>'
-            matches_html += f'''                <div class="match-item {item_class}" id="{stage_key}">
-                    <div class="match-time">{m['time']}{' 🏆' if stage_key == 'final' else ''}</div>
-                    <div class="match-teams">
-                        <span>{m['home']}</span>
-                        <span class="match-vs">vs</span>
-                        <span>{m['away']}</span>
-                    </div>
-                    {score_html}
-                    {'<div style="margin-top:12px;color:#ffd700;font-weight:bold;">📍 ' + ko['final'].get('venue','纽约大都会人寿体育场') + '</div>' if stage_key == 'final' else ''}
-                </div>\n'''
+            # 复制以免污染原数据
+            mm = dict(m)
+            # 用晋级映射替换占位符
+            for side in ('home', 'away'):
+                if mm.get(side) in adv:
+                    mm[side] = adv[mm[side]]
+
+            item_class = 'final-item' if stage_key == 'final' else ('highlight' if mm.get('highlight') or stage_key == 'semi' else '')
+            matches_html += _render_ko_match(mm, item_class, stage_key, finals_venue)
 
         stages_html += f'''        <div class="stage-section">
             <div class="stage-title"><span class="stage-badge {badge_class}">{s['icon']} {s['label']}</span> {s['dates']}</div>
