@@ -197,6 +197,90 @@ def match_html(m, group_mode=False):
 def gen_index(data, output_dir):
     """生成首页 index.html"""
     groups = data['groups']
+    ko = data.get('knockout', {})
+
+    # 通用"对阵占位卡片"渲染：1v1 / 2v2 / 1v1 / 单场
+    def _card(content, border_color='rgba(255,215,0,0.5)', text_color='#666', is_final=False):
+        bg = 'background:linear-gradient(135deg,rgba(255,215,0,0.15),rgba(255,140,0,0.15));border:1px solid rgba(255,215,0,0.3);' if is_final else 'background:rgba(0,0,0,0.3);'
+        return f'''<div style="width:160px;height:80px;{bg}border-radius:12px;display:flex;align-items:center;justify-content:center;border:2px dashed {border_color};"><span style="color:{text_color};font-weight:bold;">{content}</span></div>'''
+
+    def _team_card(name):
+        """已完成的对阵：显示真实队名（带 emoji 国旗颜色）"""
+        if not name:
+            return _card('待定')
+        # 加金色边框表示已确定
+        return f'''<div style="width:160px;height:80px;background:linear-gradient(135deg,rgba(74,222,128,0.15),rgba(34,197,94,0.1));border-radius:12px;display:flex;align-items:center;justify-content:center;border:2px solid #4ade80;font-weight:bold;color:#4ade80;font-size:1.1em;">{name}</div>'''
+
+    def _vs():
+        return '<div style="font-size:1.4em;font-weight:bold;color:#ffd700;">VS</div>'
+
+    def _stage_block(matches, num_pairs, title, anchor):
+        """生成单个 stage 的对阵预览图
+        - num_pairs: 该阶段有几场对决（1/8=4对 1/4=2对 半决赛=1对 季军/决赛=1场）
+        - 返回 HTML 块；若全部已确定则高亮已确定队伍
+        """
+        # 决定胜者
+        winners = []
+        is_final_round = (num_pairs == 1) and (title in ['决赛', '季军赛'])
+        for m in matches:
+            if m.get('status') == 'finished' and m.get('score_home') is not None and m.get('score_away') is not None:
+                sh, sa = m['score_home'], m['score_away']
+                if sh > sa:
+                    winners.append(m['home'])
+                elif sa > sh:
+                    winners.append(m['away'])
+                else:
+                    winners.append(None)
+            else:
+                winners.append(None)
+
+        # 全部已确定 → 实色高亮
+        all_known = all(w is not None for w in winners)
+
+        if num_pairs > 1:
+            # 多场对决排成一行
+            items = []
+            for i, w in enumerate(winners):
+                if i > 0:
+                    items.append('<div style="display:flex;align-items:center;gap:8px;color:#ffd700;font-weight:bold;margin:0 5px;">VS</div>')
+                if w:
+                    items.append(_team_card(w))
+                else:
+                    items.append(_card('待定'))
+            inner = ''.join(items)
+        else:
+            # 决赛 / 半决赛 / 季军赛单场：显示 home vs away 或 待定 vs 待定
+            m = matches[0] if matches else {}
+            home = m.get('home') if winners[0] and m.get('home') in (winners[0] or '') else (winners[0] or (m.get('home') if m.get('status') == 'finished' or not str(m.get('home', '')).startswith('1/16胜者') else None))
+            away = m.get('away') if winners[0] and m.get('away') in (winners[0] or '') else None
+            # 简化：直接用 winners[0] 作为胜者填充（决赛只能有一支胜者=冠军）
+            # 但用户希望看到对阵双方（决赛对决赛），所以单场显示 home vs away
+            if is_final_round:
+                # 决赛/季军赛：显示对阵双方（即便未结束）
+                if m.get('home') and m.get('away') and not str(m['home']).startswith('胜者'):
+                    home_disp = _team_card(m['home'])
+                    away_disp = _team_card(m['away'])
+                else:
+                    home_disp = _card('待定')
+                    away_disp = _card('待定')
+                inner = home_disp + _vs() + away_disp
+            else:
+                inner = _card('待定') + _vs() + _card('待定')
+
+        # 容器 + 跳转链接
+        link = f'<a href="knockout.html#{anchor}" style="color:#ffd700;text-decoration:none;margin-top:12px;display:inline-block;">查看完整{title}对阵 →</a>'
+        highlight = '' if all_known else ''
+        return f'''<div style="background:linear-gradient(135deg,rgba(255,215,0,0.1),rgba(255,140,0,0.1));border-radius:16px;padding:20px;text-align:center;border:1px solid rgba(255,215,0,0.3);display:flex;flex-direction:column;align-items:center;gap:8px;">
+            <div style="display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;">{inner}</div>
+            {link}
+        </div>'''
+
+    # 1/8决赛=8场（4对预览），1/4决赛=4场（2对预览），半决赛=2场（1对），季军赛=1场，决赛=1场
+    round8_road_html  = _stage_block(ko.get('round8',  {}).get('matches', []), 4, '1/8决赛', 'round8')
+    quarter_road_html = _stage_block(ko.get('quarter', {}).get('matches', []), 2, '1/4决赛', 'quarter')
+    semi_road_html    = _stage_block(ko.get('semi',    {}).get('matches', []), 1, '半决赛', 'semi')
+    third_road_html   = _stage_block(ko.get('third',   {}).get('matches', []), 1, '季军赛', 'third')
+    final_road_html   = _stage_block(ko.get('final',   {}).get('matches', []), 1, '决赛', 'final')
 
     # 小组卡片
     group_cards = ''
@@ -279,23 +363,11 @@ def gen_index(data, output_dir):
         <div class="nav-section">
             <div class="nav-title">🏆 淘汰赛专区</div>
             <div style="margin-bottom:25px;"><div style="font-size:1.2em;color:#ff6b6b;margin-bottom:15px;">⚔️ 1/16决赛 (6月29日-7月4日)</div><div class="nav-grid"><a href="knockout.html#round16" class="nav-card"><div>⚔️ 1/16决赛</div><div style="font-size:0.85em;color:#aaa;">6月29日-7月4日 · 16场</div></a></div></div>
-            <div style="margin-bottom:25px;"><div style="font-size:1.2em;color:#ff6b6b;margin-bottom:15px;">🎯 1/8决赛 (7月5日-7月8日)</div><div class="nav-grid"><a href="knockout.html#round8" class="nav-card"><div>🎯 1/8决赛</div><div style="font-size:0.85em;color:#aaa;">7月5日-7月8日 · 8场</div></a></div></div>
-            <div style="margin-bottom:25px;"><div style="font-size:1.2em;color:#ff6b6b;margin-bottom:15px;">💎 1/4决赛 (7月10日-7月12日)</div><div class="nav-grid"><a href="knockout.html#quarter" class="nav-card"><div>💎 1/4决赛</div><div style="font-size:0.85em;color:#aaa;">7月10日-7月12日 · 4场</div></a></div></div>
-            <div style="margin-bottom:25px;"><div style="font-size:1.2em;color:#ff6b6b;margin-bottom:15px;">🌟 半决赛 (7月15日-7月16日)</div><div class="nav-grid"><a href="knockout.html#semi" class="nav-card"><div>🌟 半决赛</div><div style="font-size:0.85em;color:#aaa;">7月15日-7月16日 · 2场</div></a></div></div>
-            <div style="margin-bottom:25px;"><div style="font-size:1.2em;color:#ff6b6b;margin-bottom:15px;">🥉 季军赛 (7月19日)</div><div class="nav-grid"><a href="knockout.html#third" class="nav-card"><div>🥉 季军赛</div><div style="font-size:0.85em;color:#aaa;">7月19日 03:00</div></a></div></div>
-            <div style="margin-bottom:25px;"><div style="font-size:1.2em;color:#ff6b6b;margin-bottom:15px;">🏆 决赛 (7月20日)</div><div class="nav-grid"><a href="knockout.html#final" class="nav-card" style="background:linear-gradient(135deg,rgba(255,215,0,0.2),rgba(255,140,0,0.3));border-color:#ffd700;"><div>🏆 决赛</div><div style="font-size:0.85em;color:#aaa;">7月20日 03:00 · 纽约</div></a></div></div>
-        </div>
-
-        <div class="nav-section">
-            <div class="nav-title">🎖️ 决赛之路</div>
-            <div style="background:linear-gradient(135deg,rgba(255,215,0,0.1),rgba(255,140,0,0.1));border-radius:16px;padding:30px;text-align:center;border:1px solid rgba(255,215,0,0.3);">
-                <div style="display:flex;align-items:center;justify-content:center;gap:30px;margin-bottom:20px;">
-                    <div style="width:150px;height:80px;background:rgba(0,0,0,0.3);border-radius:12px;display:flex;align-items:center;justify-content:center;border:2px dashed rgba(255,215,0,0.5);"><span style="color:#666;">待定</span></div>
-                    <div style="font-size:1.5em;font-weight:bold;color:#ffd700;">VS</div>
-                    <div style="width:150px;height:80px;background:rgba(0,0,0,0.3);border-radius:12px;display:flex;align-items:center;justify-content:center;border:2px dashed rgba(255,215,0,0.5);"><span style="color:#666;">待定</span></div>
-                </div>
-                <div style="color:#888;"><a href="knockout.html#final" style="color:#ffd700;text-decoration:none;">查看完整淘汰赛晋级之路 →</a></div>
-            </div>
+            <div style="margin-bottom:25px;"><div style="font-size:1.2em;color:#ff6b6b;margin-bottom:15px;">🎯 1/8决赛 (7月5日-7月8日)</div>{round8_road_html}</div>
+            <div style="margin-bottom:25px;"><div style="font-size:1.2em;color:#ff6b6b;margin-bottom:15px;">💎 1/4决赛 (7月10日-7月12日)</div>{quarter_road_html}</div>
+            <div style="margin-bottom:25px;"><div style="font-size:1.2em;color:#ff6b6b;margin-bottom:15px;">🌟 半决赛 (7月15日-7月16日)</div>{semi_road_html}</div>
+            <div style="margin-bottom:25px;"><div style="font-size:1.2em;color:#ff6b6b;margin-bottom:15px;">🥉 季军赛 (7月19日)</div>{third_road_html}</div>
+            <div style="margin-bottom:25px;"><div style="font-size:1.2em;color:#ff6b6b;margin-bottom:15px;">🏆 决赛 (7月20日)</div>{final_road_html}</div>
         </div>
 
         <div class="nav-section">
