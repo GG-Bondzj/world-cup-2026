@@ -330,26 +330,32 @@
           "events": "进球：加拉尔萨(2'闪击)"
         },
         {
-          "status": "pending",
-          "time": "6月26日 08:00",
+          "status": "finished",
+          "time": "6月26日 08:00 ✅ 已结束",
           "month": 6,
           "day": 26,
           "kickoff": "08:00",
           "home": "🇺🇸 美国",
           "away": "土耳其 🇹🇷",
           "venue": "📍 洛杉矶",
-          "group": "D组"
+          "group": "D组",
+          "score_home": 2,
+          "score_away": 3,
+          "events": "进球：特拉斯蒂(3')、贝尔哈特(49') | 土耳其：居莱尔(10')、柯克屈(30')、艾汉(90+')"
         },
         {
-          "status": "pending",
-          "time": "6月26日 08:00",
+          "status": "finished",
+          "time": "6月26日 08:00 ✅ 已结束",
           "month": 6,
           "day": 26,
           "kickoff": "08:00",
           "home": "🇵🇾 巴拉圭",
           "away": "澳大利亚 🇦🇺",
           "venue": "📍 旧金山",
-          "group": "D组"
+          "group": "D组",
+          "score_home": 0,
+          "score_away": 0,
+          "events": "双方互交白卷，澳大利亚凭净胜球小组第二出线"
         }
       ]
     },
@@ -418,26 +424,32 @@
           "events": "库拉索门将鲁姆15次扑救创本届纪录 | 马宁执法出示6张黄牌"
         },
         {
-          "status": "pending",
-          "time": "6月26日 02:00",
+          "status": "finished",
+          "time": "6月26日 02:00 ✅ 已结束",
           "month": 6,
           "day": 26,
           "kickoff": "02:00",
           "home": "🇪🇨 厄瓜多尔",
           "away": "德国 🇩🇪",
           "venue": "📍 纽约",
-          "group": "E组"
+          "group": "E组",
+          "score_home": 2,
+          "score_away": 1,
+          "events": "进球：安古洛(9')、普拉塔(77') | 德国：萨内(2') | 德国仍小组第一出线"
         },
         {
-          "status": "pending",
-          "time": "6月26日 02:00",
+          "status": "finished",
+          "time": "6月26日 02:00 ✅ 已结束",
           "month": 6,
           "day": 26,
           "kickoff": "02:00",
           "home": "🇨🇼 库拉索",
           "away": "科特迪瓦 🇨🇮",
           "venue": "📍 费城",
-          "group": "E组"
+          "group": "E组",
+          "score_home": 0,
+          "score_away": 2,
+          "events": "进球：佩佩(7'、64') | 科特迪瓦小组第二出线"
         }
       ]
     },
@@ -507,26 +519,32 @@
           "events": "进球：镰田大地(4')、上田绮世(31')、中村敬斗、久保健英 | 日本队史首次单场4球"
         },
         {
-          "status": "pending",
-          "time": "6月26日 05:00",
+          "status": "finished",
+          "time": "6月26日 05:00 ✅ 已结束",
           "month": 6,
           "day": 26,
           "kickoff": "05:00",
           "home": "🇹🇳 突尼斯",
           "away": "荷兰 🇳🇱",
           "venue": "📍 堪萨斯城",
-          "group": "F组"
+          "group": "F组",
+          "score_home": 1,
+          "score_away": 3,
+          "events": "进球：马斯图里(54') | 荷兰：斯基里(3'乌龙)、布罗贝(7')、范赫克(62')"
         },
         {
-          "status": "pending",
-          "time": "6月26日 05:00",
+          "status": "finished",
+          "time": "6月26日 05:00 ✅ 已结束",
           "month": 6,
           "day": 26,
           "kickoff": "05:00",
           "home": "🇯🇵 日本",
           "away": "瑞典 🇸🇪",
           "venue": "📍 达拉斯",
-          "group": "F组"
+          "group": "F组",
+          "score_home": 1,
+          "score_away": 1,
+          "events": "进球：前田(56') | 瑞典：埃兰加(62') | 日本小组第二出线"
         }
       ]
     },
@@ -595,26 +613,32 @@
           "events": "进球：苏尔曼(上半场) | 埃及：齐科头球、萨拉赫推射、特雷泽盖(萨拉赫助攻) — 埃及92年队史世界杯首胜！"
         },
         {
-          "status": "pending",
-          "time": "6月27日 11:00",
+          "status": "finished",
+          "time": "6月27日 11:00 ✅ 已结束",
           "month": 6,
           "day": 27,
           "kickoff": "11:00",
           "home": "🇳🇿 新西兰",
           "away": "比利时 🇧🇪",
           "venue": "📍 温哥华",
-          "group": "G组"
+          "group": "G组",
+          "score_home": 1,
+          "score_away": 5,
+          "events": "进球：贾斯特(??') | 比利时：特罗萨德(2球)、德布劳内、卢卡库、萨莱马克斯"
         },
         {
-          "status": "pending",
-          "time": "6月27日 11:00",
+          "status": "finished",
+          "time": "6月27日 11:00 ✅ 已结束",
           "month": 6,
           "day": 27,
           "kickoff": "11:00",
           "home": "🇪🇬 埃及",
           "away": "伊朗 🇮🇷",
           "venue": "📍 西雅图",
-          "group": "G组"
+          "group": "G组",
+          "score_home": 1,
+          "score_away": 1,
+          "events": "进球：萨比尔(补射) | 伊朗：礼萨扬(补射) | 塔雷米失点，埃及出线伊朗出局"
         }
       ]
     },
@@ -683,26 +707,32 @@
           "events": "进球：阿劳霍(44')、卡诺比奥(45+') | 佛得角：皮纳(21'任意球队史首球)、瓦雷拉(61') | 佛得角两连平创奇迹！"
         },
         {
-          "status": "pending",
-          "time": "6月27日 08:00",
+          "status": "finished",
+          "time": "6月27日 08:00 ✅ 已结束",
           "month": 6,
           "day": 27,
           "kickoff": "08:00",
           "home": "🇺🇾 乌拉圭",
           "away": "西班牙 🇪🇸",
           "venue": "📍 萨波潘",
-          "group": "H组"
+          "group": "H组",
+          "score_home": 0,
+          "score_away": 1,
+          "events": "进球：巴埃纳(上半场) | 西班牙小组第一出线，乌拉圭出局"
         },
         {
-          "status": "pending",
-          "time": "6月27日 08:00",
+          "status": "finished",
+          "time": "6月27日 08:00 ✅ 已结束",
           "month": 6,
           "day": 27,
           "kickoff": "08:00",
           "home": "🇨🇻 佛得角",
           "away": "沙特 🇸🇦",
           "venue": "📍 休斯顿",
-          "group": "H组"
+          "group": "H组",
+          "score_home": 0,
+          "score_away": 0,
+          "events": "佛得角三连平创历史，队史首次晋级世界杯淘汰赛"
         }
       ]
     },
@@ -773,8 +803,8 @@
           "events": "进球：彼得森(43')、哈兰德(下半场双响梅开二度) | 塞内加尔：萨尔(下半场两球) | 挪威两连胜提前出线 — 时隔28年重返世界杯即晋级！"
         },
         {
-          "status": "pending",
-          "time": "6月27日 03:00 🔥",
+          "status": "finished",
+          "time": "6月27日 03:00 ✅ 已结束",
           "month": 6,
           "day": 27,
           "kickoff": "03:00",
@@ -782,18 +812,24 @@
           "away": "法国 🇫🇷",
           "venue": "📍 波士顿 - 姆巴佩vs哈兰德",
           "highlight": true,
-          "group": "I组"
+          "group": "I组",
+          "score_home": 1,
+          "score_away": 4,
+          "events": "进球：奥斯高(上半场) | 法国：登贝莱帽子戏法、杜埃(补时) | 法国全胜出线"
         },
         {
-          "status": "pending",
-          "time": "6月27日 03:00",
+          "status": "finished",
+          "time": "6月27日 03:00 ✅ 已结束",
           "month": 6,
           "day": 27,
           "kickoff": "03:00",
           "home": "🇸🇳 塞内加尔",
           "away": "伊拉克 🇮🇶",
           "venue": "📍 多伦多",
-          "group": "I组"
+          "group": "I组",
+          "score_home": 5,
+          "score_away": 0,
+          "events": "进球：迪亚拉(闪击)、萨尔、盖伊(梅开二度)、恩迪亚耶 | 苏拉卡红牌"
         }
       ]
     },
@@ -864,26 +900,32 @@
           "events": "进球：约旦 尼扎尔(36'队史世界杯首球) | 阿尔及利亚：本布阿利(马赫雷斯助攻头球扳平)、古伊里(乱战制胜球) | 约旦两连败0分垫底"
         },
         {
-          "status": "pending",
-          "time": "6月28日 08:00",
+          "status": "finished",
+          "time": "6月28日 08:00 ✅ 已结束",
           "month": 6,
           "day": 28,
           "kickoff": "08:00",
           "home": "🇯🇴 约旦",
           "away": "阿根廷 🇦🇷",
           "venue": "📍 达拉斯",
-          "group": "J组"
+          "group": "J组",
+          "score_home": 1,
+          "score_away": 3,
+          "events": "进球：塔马里(55') | 阿根廷：洛塞尔索(19'任意球)、劳塔罗(31'点球)、梅西(80'任意球)"
         },
         {
-          "status": "pending",
-          "time": "6月28日 08:00",
+          "status": "finished",
+          "time": "6月28日 08:00 ✅ 已结束",
           "month": 6,
           "day": 28,
           "kickoff": "08:00",
           "home": "🇩🇿 阿尔及利亚",
           "away": "奥地利 🇦🇹",
           "venue": "📍 堪萨斯城",
-          "group": "J组"
+          "group": "J组",
+          "score_home": 3,
+          "score_away": 3,
+          "events": "进球：贝尔加利、马赫雷斯(60'、90+3') | 奥地利：阿瑙托维奇、扎比策、卡莱季奇(90+6'绝平)"
         }
       ]
     },
@@ -954,26 +996,32 @@
           "events": "进球：穆尼奥斯(76'变线低射) | 刚果金门将Mpasi前20分钟5次扑救 | 哥伦比亚6分提前出线！末轮与葡萄牙直接交锋争小组头名"
         },
         {
-          "status": "pending",
-          "time": "6月28日 05:30",
+          "status": "finished",
+          "time": "6月28日 05:30 ✅ 已结束",
           "month": 6,
           "day": 28,
           "kickoff": "05:30",
           "home": "🇨🇴 哥伦比亚",
           "away": "葡萄牙 🇵🇹",
           "venue": "📍 迈阿密",
-          "group": "K组"
+          "group": "K组",
+          "score_home": 0,
+          "score_away": 0,
+          "events": "双方握手言和，哥伦比亚小组第一、葡萄牙小组第二携手出线"
         },
         {
-          "status": "pending",
-          "time": "6月28日 05:30",
+          "status": "finished",
+          "time": "6月28日 05:30 ✅ 已结束",
           "month": 6,
           "day": 28,
           "kickoff": "05:30",
           "home": "🇺🇿 乌兹别克斯坦",
           "away": "刚果金 🇨🇩",
           "venue": "📍 亚特兰大",
-          "group": "K组"
+          "group": "K组",
+          "score_home": 1,
+          "score_away": 3,
+          "events": "进球：肖穆罗多夫(10') | 刚果金：维萨(68'点球、90+1')、马耶莱(78')"
         }
       ]
     },
@@ -1043,26 +1091,32 @@
           "events": "进球：布迪米尔(54'替补推射破门，斯塔尼西奇助攻) | 莫德里奇200场国家队里程碑 | 巴拿马两连败0分提前出局"
         },
         {
-          "status": "pending",
-          "time": "6月28日 03:00",
+          "status": "finished",
+          "time": "6月28日 03:00 ✅ 已结束",
           "month": 6,
           "day": 28,
           "kickoff": "03:00",
           "home": "🇵🇦 巴拿马",
           "away": "英格兰 🏴󠁧󠁢󠁥󠁮󠁧󠁿",
           "venue": "📍 纽约",
-          "group": "L组"
+          "group": "L组",
+          "score_home": 0,
+          "score_away": 2,
+          "events": "进球：贝林厄姆(62')、凯恩(67') | 英格兰小组头名出线"
         },
         {
-          "status": "pending",
-          "time": "6月28日 03:00",
+          "status": "finished",
+          "time": "6月28日 03:00 ✅ 已结束",
           "month": 6,
           "day": 28,
           "kickoff": "03:00",
           "home": "🇭🇷 克罗地亚",
           "away": "加纳 🇬🇭",
           "venue": "📍 费城",
-          "group": "L组"
+          "group": "L组",
+          "score_home": 2,
+          "score_away": 1,
+          "events": "进球：苏契奇(31')、弗拉希奇(83'绝杀) | 加纳：库卡森(73')"
         }
       ]
     }
@@ -1639,140 +1693,194 @@
     "0626": {
       "matches": [
         {
-          "status": "pending",
-          "time": "02:00",
+          "status": "finished",
+          "time": "02:00 ✅ 已结束",
           "home": "🇪🇨 厄瓜多尔",
           "away": "德国 🇩🇪",
-          "group": "E组"
+          "group": "E组",
+          "score_home": 2,
+          "score_away": 1,
+          "events": "进球：安古洛(9')、普拉塔(77') | 德国：萨内(2') | 德国仍小组第一出线"
         },
         {
-          "status": "pending",
-          "time": "02:00",
+          "status": "finished",
+          "time": "02:00 ✅ 已结束",
           "home": "🇨🇼 库拉索",
           "away": "科特迪瓦 🇨🇮",
-          "group": "E组"
+          "group": "E组",
+          "score_home": 0,
+          "score_away": 2,
+          "events": "进球：佩佩(7'、64') | 科特迪瓦小组第二出线"
         },
         {
-          "status": "pending",
-          "time": "05:00",
+          "status": "finished",
+          "time": "05:00 ✅ 已结束",
           "home": "🇹🇳 突尼斯",
           "away": "荷兰 🇳🇱",
-          "group": "F组"
+          "group": "F组",
+          "score_home": 1,
+          "score_away": 3,
+          "events": "进球：马斯图里(54') | 荷兰：斯基里(3'乌龙)、布罗贝(7')、范赫克(62')"
         },
         {
-          "status": "pending",
-          "time": "05:00",
+          "status": "finished",
+          "time": "05:00 ✅ 已结束",
           "home": "🇯🇵 日本",
           "away": "瑞典 🇸🇪",
-          "group": "F组"
+          "group": "F组",
+          "score_home": 1,
+          "score_away": 1,
+          "events": "进球：前田(56') | 瑞典：埃兰加(62') | 日本小组第二出线"
         },
         {
-          "status": "pending",
-          "time": "08:00",
+          "status": "finished",
+          "time": "08:00 ✅ 已结束",
           "home": "🇺🇸 美国",
           "away": "土耳其 🇹🇷",
-          "group": "D组"
+          "group": "D组",
+          "score_home": 2,
+          "score_away": 3,
+          "events": "进球：特拉斯蒂(3')、贝尔哈特(49') | 土耳其：居莱尔(10')、柯克屈(30')、艾汉(90+')"
         },
         {
-          "status": "pending",
-          "time": "08:00",
+          "status": "finished",
+          "time": "08:00 ✅ 已结束",
           "home": "🇵🇾 巴拉圭",
           "away": "澳大利亚 🇦🇺",
-          "group": "D组"
+          "group": "D组",
+          "score_home": 0,
+          "score_away": 0,
+          "events": "双方互交白卷，澳大利亚凭净胜球小组第二出线"
         }
       ]
     },
     "0627": {
       "matches": [
         {
-          "status": "pending",
-          "time": "03:00",
+          "status": "finished",
+          "time": "03:00 ✅ 已结束",
           "home": "🇳🇴 挪威",
           "away": "法国 🇫🇷",
           "tag": "★ 姆巴佩 vs 哈兰德",
-          "group": "I组"
+          "group": "I组",
+          "score_home": 1,
+          "score_away": 4,
+          "events": "进球：奥斯高(上半场) | 法国：登贝莱帽子戏法、杜埃(补时) | 法国全胜出线"
         },
         {
-          "status": "pending",
-          "time": "03:00",
+          "status": "finished",
+          "time": "03:00 ✅ 已结束",
           "home": "🇸🇳 塞内加尔",
           "away": "伊拉克 🇮🇶",
-          "group": "I组"
+          "group": "I组",
+          "score_home": 5,
+          "score_away": 0,
+          "events": "进球：迪亚拉(闪击)、萨尔、盖伊(梅开二度)、恩迪亚耶 | 苏拉卡红牌"
         },
         {
-          "status": "pending",
-          "time": "08:00",
+          "status": "finished",
+          "time": "08:00 ✅ 已结束",
           "home": "🇺🇾 乌拉圭",
           "away": "西班牙 🇪🇸",
-          "group": "H组"
+          "group": "H组",
+          "score_home": 0,
+          "score_away": 1,
+          "events": "进球：巴埃纳(上半场) | 西班牙小组第一出线，乌拉圭出局"
         },
         {
-          "status": "pending",
-          "time": "08:00",
+          "status": "finished",
+          "time": "08:00 ✅ 已结束",
           "home": "🇨🇻 佛得角",
           "away": "沙特 🇸🇦",
-          "group": "H组"
+          "group": "H组",
+          "score_home": 0,
+          "score_away": 0,
+          "events": "佛得角三连平创历史，队史首次晋级世界杯淘汰赛"
         },
         {
-          "status": "pending",
-          "time": "11:00",
+          "status": "finished",
+          "time": "11:00 ✅ 已结束",
           "home": "🇳🇿 新西兰",
           "away": "比利时 🇧🇪",
-          "group": "G组"
+          "group": "G组",
+          "score_home": 1,
+          "score_away": 5,
+          "events": "进球：贾斯特(??') | 比利时：特罗萨德(2球)、德布劳内、卢卡库、萨莱马克斯"
         },
         {
-          "status": "pending",
-          "time": "11:00",
+          "status": "finished",
+          "time": "11:00 ✅ 已结束",
           "home": "🇪🇬 埃及",
           "away": "伊朗 🇮🇷",
-          "group": "G组"
+          "group": "G组",
+          "score_home": 1,
+          "score_away": 1,
+          "events": "进球：萨比尔(补射) | 伊朗：礼萨扬(补射) | 塔雷米失点，埃及出线伊朗出局"
         }
       ]
     },
     "0628": {
       "matches": [
         {
-          "status": "pending",
-          "time": "03:00",
+          "status": "finished",
+          "time": "03:00 ✅ 已结束",
           "home": "🇵🇦 巴拿马",
           "away": "英格兰 🏴󠁧󠁢󠁥󠁮󠁧󠁿",
-          "group": "L组"
+          "group": "L组",
+          "score_home": 0,
+          "score_away": 2,
+          "events": "进球：贝林厄姆(62')、凯恩(67') | 英格兰小组头名出线"
         },
         {
-          "status": "pending",
-          "time": "03:00",
+          "status": "finished",
+          "time": "03:00 ✅ 已结束",
           "home": "🇭🇷 克罗地亚",
           "away": "加纳 🇬🇭",
-          "group": "L组"
+          "group": "L组",
+          "score_home": 2,
+          "score_away": 1,
+          "events": "进球：苏契奇(31')、弗拉希奇(83'绝杀) | 加纳：库卡森(73')"
         },
         {
-          "status": "pending",
-          "time": "05:30",
+          "status": "finished",
+          "time": "05:30 ✅ 已结束",
           "home": "🇨🇴 哥伦比亚",
           "away": "葡萄牙 🇵🇹",
-          "group": "K组"
+          "group": "K组",
+          "score_home": 0,
+          "score_away": 0,
+          "events": "双方握手言和，哥伦比亚小组第一、葡萄牙小组第二携手出线"
         },
         {
-          "status": "pending",
-          "time": "05:30",
+          "status": "finished",
+          "time": "05:30 ✅ 已结束",
           "home": "🇺🇿 乌兹别克斯坦",
           "away": "刚果金 🇨🇩",
-          "group": "K组"
+          "group": "K组",
+          "score_home": 1,
+          "score_away": 3,
+          "events": "进球：肖穆罗多夫(10') | 刚果金：维萨(68'点球、90+1')、马耶莱(78')"
         },
         {
-          "status": "pending",
-          "time": "08:00",
+          "status": "finished",
+          "time": "08:00 ✅ 已结束",
           "home": "🇯🇴 约旦",
           "away": "阿根廷 🇦🇷",
           "tag": "最后一轮",
-          "group": "J组"
+          "group": "J组",
+          "score_home": 1,
+          "score_away": 3,
+          "events": "进球：塔马里(55') | 阿根廷：洛塞尔索(19'任意球)、劳塔罗(31'点球)、梅西(80'任意球)"
         },
         {
-          "status": "pending",
-          "time": "08:00",
+          "status": "finished",
+          "time": "08:00 ✅ 已结束",
           "home": "🇩🇿 阿尔及利亚",
           "away": "奥地利 🇦🇹",
-          "group": "J组"
+          "group": "J组",
+          "score_home": 3,
+          "score_away": 3,
+          "events": "进球：贝尔加利、马赫雷斯(60'、90+3') | 奥地利：阿瑙托维奇、扎比策、卡莱季奇(90+6'绝平)"
         }
       ]
     }
@@ -1784,9 +1892,14 @@
       "icon": "⚔️",
       "matches": [
         {
-          "time": "6月29日 03:00",
-          "home": "A组第1",
-          "away": "B组第2"
+          "time": "6月29日 03:00 ✅ 已结束",
+          "home": "🇿🇦 南非",
+          "away": "加拿大 🇨🇦",
+          "score_home": 0,
+          "score_away": 1,
+          "status": "finished",
+          "events": "进球：欧斯塔基奥(90+2'绝杀) | 加拿大队史首次晋级世界杯16强",
+          "venue": "📍 1/16决赛 · 墨西哥城"
         },
         {
           "time": "6月29日 08:00",
