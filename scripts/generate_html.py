@@ -199,20 +199,20 @@ def gen_index(data, output_dir):
     groups = data['groups']
     ko = data.get('knockout', {})
 
-    # 通用"对阵占位卡片"渲染：1v1 / 2v2 / 1v1 / 单场
+    # 通用"对阵占位卡片"渲染：宽度自适应，移动端更友好
     def _card(content, border_color='rgba(255,215,0,0.5)', text_color='#666', is_final=False):
         bg = 'background:linear-gradient(135deg,rgba(255,215,0,0.15),rgba(255,140,0,0.15));border:1px solid rgba(255,215,0,0.3);' if is_final else 'background:rgba(0,0,0,0.3);'
-        return f'''<div style="width:160px;height:80px;{bg}border-radius:12px;display:flex;align-items:center;justify-content:center;border:2px dashed {border_color};"><span style="color:{text_color};font-weight:bold;">{content}</span></div>'''
+        return f'''<div style="min-width:120px;max-width:180px;width:48%;height:60px;{bg}border-radius:10px;display:flex;align-items:center;justify-content:center;border:2px dashed {border_color};padding:6px 10px;"><span style="color:{text_color};font-weight:bold;font-size:0.95em;text-align:center;">{content}</span></div>'''
 
     def _team_card(name):
         """已完成的对阵：显示真实队名（带 emoji 国旗颜色）"""
         if not name:
             return _card('待定')
         # 加金色边框表示已确定
-        return f'''<div style="width:160px;height:80px;background:linear-gradient(135deg,rgba(74,222,128,0.15),rgba(34,197,94,0.1));border-radius:12px;display:flex;align-items:center;justify-content:center;border:2px solid #4ade80;font-weight:bold;color:#4ade80;font-size:1.1em;">{name}</div>'''
+        return f'''<div style="min-width:120px;max-width:180px;width:48%;height:60px;background:linear-gradient(135deg,rgba(74,222,128,0.15),rgba(34,197,94,0.1));border-radius:10px;display:flex;align-items:center;justify-content:center;border:2px solid #4ade80;font-weight:bold;color:#4ade80;font-size:1em;padding:6px 10px;text-align:center;">{name}</div>'''
 
     def _vs():
-        return '<div style="font-size:1.4em;font-weight:bold;color:#ffd700;">VS</div>'
+        return '<div style="font-size:1.2em;font-weight:bold;color:#ffd700;margin:0 4px;">VS</div>'
 
     def _stage_block(matches, num_pairs, title, anchor):
         """生成单个 stage 的对阵预览图
@@ -247,7 +247,7 @@ def gen_index(data, output_dir):
                 w_a = winners[p * 2]
                 w_b = winners[p * 2 + 1]
                 pair_blocks.append(
-                    '<div style="display:flex;align-items:center;justify-content:center;gap:15px;">'
+                    '<div style="display:flex;align-items:center;justify-content:center;gap:10px;">'
                     + (_team_card(w_a) if w_a else _card('待定'))
                     + _vs()
                     + (_team_card(w_b) if w_b else _card('待定'))
@@ -255,23 +255,26 @@ def gen_index(data, output_dir):
                 )
             inner = ''.join(pair_blocks)
         else:
-            # 决赛 / 半决赛 / 季军赛单场：显示 home vs away 或 待定 vs 待定
+            # 决赛 / 半决赛 / 季军赛单场：竖排布局，VS 居中
             m = matches[0] if matches else {}
-            home = m.get('home') if winners[0] and m.get('home') in (winners[0] or '') else (winners[0] or (m.get('home') if m.get('status') == 'finished' or not str(m.get('home', '')).startswith('1/16胜者') else None))
-            away = m.get('away') if winners[0] and m.get('away') in (winners[0] or '') else None
-            # 简化：直接用 winners[0] 作为胜者填充（决赛只能有一支胜者=冠军）
-            # 但用户希望看到对阵双方（决赛对决赛），所以单场显示 home vs away
             if is_final_round:
-                # 决赛/季军赛：显示对阵双方（即便未结束）
                 if m.get('home') and m.get('away') and not str(m['home']).startswith('胜者'):
                     home_disp = _team_card(m['home'])
                     away_disp = _team_card(m['away'])
                 else:
                     home_disp = _card('待定')
                     away_disp = _card('待定')
-                inner = home_disp + _vs() + away_disp
             else:
-                inner = _card('待定') + _vs() + _card('待定')
+                home_disp = _card('待定')
+                away_disp = _card('待定')
+            # 竖排：上-队伍1 / 中-VS / 下-队伍2
+            inner = (
+                '<div style="display:flex;flex-direction:column;align-items:center;gap:10px;width:100%;max-width:280px;">'
+                f'<div style="display:flex;justify-content:center;width:100%;">{home_disp}</div>'
+                '<div style="font-size:1.3em;font-weight:bold;color:#ffd700;letter-spacing:2px;">VS</div>'
+                f'<div style="display:flex;justify-content:center;width:100%;">{away_disp}</div>'
+                '</div>'
+            )
 
         # 容器 + 跳转链接
         link = f'<a href="knockout.html#{anchor}" style="color:#ffd700;text-decoration:none;margin-top:12px;display:inline-block;">查看完整{title}对阵 →</a>'
