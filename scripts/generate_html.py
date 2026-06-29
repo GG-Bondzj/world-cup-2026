@@ -238,16 +238,22 @@ def gen_index(data, output_dir):
         all_known = all(w is not None for w in winners)
 
         if num_pairs > 1:
-            # 多场对决排成一行
-            items = []
-            for i, w in enumerate(winners):
-                if i > 0:
-                    items.append('<div style="display:flex;align-items:center;gap:8px;color:#ffd700;font-weight:bold;margin:0 5px;">VS</div>')
-                if w:
-                    items.append(_team_card(w))
-                else:
-                    items.append(_card('待定'))
-            inner = ''.join(items)
+            # 多场对决：1/8决赛=4对、1/4决赛=2对、半决赛=1对
+            # winners 长度 = matches 数量 = 2*num_pairs，每两场决出 1 支胜者，组成一对对阵
+            if len(winners) != num_pairs * 2:
+                winners = (winners + [None] * (num_pairs * 2))[:num_pairs * 2]
+            pair_blocks = []
+            for p in range(num_pairs):
+                w_a = winners[p * 2]
+                w_b = winners[p * 2 + 1]
+                pair_blocks.append(
+                    '<div style="display:flex;align-items:center;justify-content:center;gap:15px;">'
+                    + (_team_card(w_a) if w_a else _card('待定'))
+                    + _vs()
+                    + (_team_card(w_b) if w_b else _card('待定'))
+                    + '</div>'
+                )
+            inner = ''.join(pair_blocks)
         else:
             # 决赛 / 半决赛 / 季军赛单场：显示 home vs away 或 待定 vs 待定
             m = matches[0] if matches else {}
@@ -270,7 +276,7 @@ def gen_index(data, output_dir):
         # 容器 + 跳转链接
         link = f'<a href="knockout.html#{anchor}" style="color:#ffd700;text-decoration:none;margin-top:12px;display:inline-block;">查看完整{title}对阵 →</a>'
         highlight = '' if all_known else ''
-        return f'''<div style="background:linear-gradient(135deg,rgba(255,215,0,0.1),rgba(255,140,0,0.1));border-radius:16px;padding:20px;text-align:center;border:1px solid rgba(255,215,0,0.3);display:flex;flex-direction:column;align-items:center;gap:8px;">
+        return f'''<div style="background:linear-gradient(135deg,rgba(255,215,0,0.1),rgba(255,140,0,0.1));border-radius:16px;padding:20px;text-align:center;border:1px solid rgba(255,215,0,0.3);display:flex;flex-direction:column;align-items:center;gap:14px;">
             <div style="display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap;">{inner}</div>
             {link}
         </div>'''
