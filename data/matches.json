@@ -1898,63 +1898,145 @@
           "score_home": 0,
           "score_away": 1,
           "status": "finished",
-          "events": "进球：欧斯塔基奥(90+2'绝杀) | 加拿大队史首次晋级世界杯16强",
-          "venue": "📍 1/16决赛 · 墨西哥城"
+          "events": "进球：欧斯塔基奥(90+2'禁区内贴地斩绝杀) | 加拿大队史首次晋级世界杯16强",
+          "venue": "📍 1/16决赛 · 洛杉矶SoFi体育场"
         },
         {
-          "time": "6月29日 08:00",
-          "home": "B组第1",
-          "away": "A组第2"
+          "time": "6月30日 01:00",
+          "home": "🇧🇷 巴西",
+          "away": "日本 🇯🇵",
+          "venue": "📍 1/16决赛 · 休斯顿NRG体育场",
+          "tag": "★ C组第1 vs F组第2",
+          "group": "C组",
+          "status": "pending"
         },
         {
-          "time": "6月30日 03:00",
-          "home": "C组第1",
-          "away": "D组第2"
+          "time": "6月30日 04:30",
+          "home": "🇩🇪 德国",
+          "away": "巴拉圭 🇵🇾",
+          "venue": "📍 1/16决赛 · 波士顿吉列体育场",
+          "tag": "★ E组第1 vs A组第3",
+          "group": "E组",
+          "status": "pending"
         },
         {
-          "time": "6月30日 08:00",
-          "home": "D组第1",
-          "away": "C组第2"
+          "time": "6月30日 09:00",
+          "home": "🇳🇱 荷兰",
+          "away": "摩洛哥 🇲🇦",
+          "venue": "📍 1/16决赛 · 蒙特雷Estadio Monterrey",
+          "tag": "★ F组第1 vs C组第2",
+          "group": "F组",
+          "status": "pending"
         },
         {
-          "time": "7月1日 03:00",
-          "home": "E组第1",
-          "away": "F组第2"
+          "time": "7月1日 01:00",
+          "home": "🇨🇮 科特迪瓦",
+          "away": "挪威 🇳🇴",
+          "venue": "📍 1/16决赛 · 达拉斯AT&T体育场",
+          "tag": "★ E组第2 vs I组第2",
+          "group": "E组",
+          "status": "pending"
         },
         {
-          "time": "7月1日 08:00",
-          "home": "F组第1",
-          "away": "E组第2"
+          "time": "7月1日 05:00",
+          "home": "🇫🇷 法国",
+          "away": "瑞典 🇸🇪",
+          "venue": "📍 1/16决赛 · 新泽西MetLife体育场",
+          "tag": "★ I组第1 vs F组第3",
+          "group": "I组",
+          "status": "pending"
         },
         {
-          "time": "7月2日 03:00",
-          "home": "G组第1",
-          "away": "H组第2"
+          "time": "7月1日 09:00",
+          "home": "🇲🇽 墨西哥",
+          "away": "厄瓜多尔 🇪🇨",
+          "venue": "📍 1/16决赛 · 墨西哥城阿兹特克体育场",
+          "tag": "★ A组第1 vs E组第3",
+          "group": "A组",
+          "status": "pending"
+        },
+        {
+          "time": "7月2日 00:00",
+          "home": "🏴󠁧󠁢󠁥󠁮󠁧󠁿 英格兰",
+          "away": "刚果（金） 🇨🇩",
+          "venue": "📍 1/16决赛 · 亚特兰大奔驰体育场",
+          "tag": "★ L组第1 vs J组第3",
+          "group": "L组",
+          "status": "pending"
+        },
+        {
+          "time": "7月2日 04:00",
+          "home": "🇧🇪 比利时",
+          "away": "塞内加尔 🇸🇳",
+          "venue": "📍 1/16决赛 · 西雅图Lumen Field",
+          "tag": "★ G组第1 vs I组第3",
+          "group": "G组",
+          "status": "pending"
         },
         {
           "time": "7月2日 08:00",
-          "home": "H组第1",
-          "away": "G组第2"
+          "home": "🇺🇸 美国",
+          "away": "波黑 🇧🇦",
+          "venue": "📍 1/16决赛 · 旧金山湾区Levi's体育场",
+          "tag": "★ D组第1 vs B组第3",
+          "group": "D组",
+          "status": "pending"
         },
         {
           "time": "7月3日 03:00",
-          "home": "I组第1",
-          "away": "J组第2"
+          "home": "🇪🇸 西班牙",
+          "away": "奥地利 🇦🇹",
+          "venue": "📍 1/16决赛 · 洛杉矶SoFi体育场",
+          "tag": "★ H组第1 vs J组第2",
+          "group": "H组",
+          "status": "pending"
         },
         {
-          "time": "7月3日 08:00",
-          "home": "J组第1",
-          "away": "I组第2"
+          "time": "7月3日 07:00",
+          "home": "🇵🇹 葡萄牙",
+          "away": "克罗地亚 🇭🇷",
+          "venue": "📍 1/16决赛 · 多伦多BMO体育场",
+          "tag": "★ K组第2 vs L组第2",
+          "highlight": true,
+          "group": "K组",
+          "status": "pending"
         },
         {
-          "time": "7月4日 03:00",
-          "home": "K组第1",
-          "away": "L组第2"
+          "time": "7月3日 11:00",
+          "home": "🇨🇭 瑞士",
+          "away": "阿尔及利亚 🇩🇿",
+          "venue": "📍 1/16决赛 · 温哥华BC Place",
+          "tag": "★ B组第1 vs J组第3",
+          "group": "B组",
+          "status": "pending"
         },
         {
-          "time": "7月4日 08:00",
-          "home": "L组第1",
-          "away": "K组第2"
+          "time": "7月4日 02:00",
+          "home": "🇦🇺 澳大利亚",
+          "away": "埃及 🇪🇬",
+          "venue": "📍 1/16决赛 · 达拉斯AT&T体育场",
+          "tag": "★ D组第2 vs G组第2",
+          "group": "D组",
+          "status": "pending"
+        },
+        {
+          "time": "7月4日 06:00",
+          "home": "🇦🇷 阿根廷",
+          "away": "佛得角 🇨🇻",
+          "venue": "📍 1/16决赛 · 迈阿密Hard Rock体育场",
+          "tag": "★ J组第1 vs H组第2",
+          "highlight": true,
+          "group": "J组",
+          "status": "pending"
+        },
+        {
+          "time": "7月4日 09:30",
+          "home": "🇨🇴 哥伦比亚",
+          "away": "加纳 🇬🇭",
+          "venue": "📍 1/16决赛 · 堪萨斯城箭头体育场",
+          "tag": "★ K组第1 vs D组第3",
+          "group": "K组",
+          "status": "pending"
         }
       ]
     },
