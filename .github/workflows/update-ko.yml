@@ -1,0 +1,53 @@
+name: Update Knockout Stage (10:00 北京)
+
+on:
+  schedule:
+    # UTC 2:00 = 北京时间 10:00
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+  push:
+    branches: [master]
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check date
+        run: |
+          # 只在 7/5 - 7/20 期间执行（KO 阶段：1/8决赛到决赛）
+          DAY=$(date +%m%d)
+          if [[ "$DAY" < "0705" ]] || [[ "$DAY" > "0720" ]]; then
+            echo "不在 KO 阶段，跳过执行 (日期: $DAY)"
+            exit 78
+          fi
+          echo "在 KO 阶段日期范围内，继续执行"
+
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Search for Today's Results
+        run: |
+          echo "=== 搜索今日世界杯比赛结果 ==="
+          echo "注意: 需要手动更新或使用其他数据源"
+
+      - name: Update matches.json
+        run: |
+          echo "=== 更新数据 ==="
+          echo "提示: 请在本地更新 data/matches.json 后推送"
+
+      - name: Generate HTML
+        run: |
+          pip install jinja2
+          python scripts/generate_html.py
+
+      - name: Commit and Push
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff --staged --quiet || git commit -m "自动更新赛程 $(date +%Y-%m-%d)"
+          git push
