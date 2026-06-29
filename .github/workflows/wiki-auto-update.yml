@@ -1,0 +1,67 @@
+name: 每日赛程AI自动更新 (10:00 北京)
+
+on:
+  schedule:
+    # UTC 2:00 = 北京时间 10:00
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: 检查日期范围
+        run: |
+          DAY=$(date +%m%d)
+          if [[ "$DAY" < "0612" ]] || [[ "$DAY" > "0720" ]]; then
+            echo "不在世界杯期间 (6/12-7/20), 跳过. 当前日期: $DAY"
+            exit 78
+          fi
+          echo "世界杯期间, 执行AI更新"
+
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: 抓取维基百科 + AI 提取
+        id: extract
+        env:
+          CODING_API_KEY: ${{ secrets.CODING_API_KEY }}
+        run: |
+          echo "=== 抓取维基百科并调用大模型提取结果 ==="
+          python scripts/wiki_update.py 2>&1 | tee wiki_update.log
+          if git diff --quiet data/matches.json; then
+            echo "no_changes=true" >> $GITHUB_OUTPUT
+            echo "本次无数据更新"
+          else
+            echo "no_changes=false" >> $GITHUB_OUTPUT
+            echo "本次有数据更新"
+          fi
+
+      - name: 生成 HTML
+        if: steps.extract.outputs.no_changes != 'true'
+        run: |
+          echo "=== 生成 HTML 页面 ==="
+          pip install jinja2 --quiet
+          python scripts/generate_html.py
+
+      - name: 提交并推送
+        if: steps.extract.outputs.no_changes != 'true'
+        run: |
+          echo "=== 提交并推送到 GitHub ==="
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add -A
+          git diff --staged --quiet && echo "无新内容需要提交" && exit 0
+          git commit -m "AI自动更新: $(date +%Y-%m-%d) 比赛结果"
+          git push
+          echo "推送成功"
+
+      - name: 输出日志
+        if: always()
+        run: |
+          echo "=== AI 更新日志 ==="
+          cat wiki_update.log 2>/dev/null || echo "无日志"

@@ -10,4 +10,7 @@ world_cup_2026.html
 screenshot.png
 md2docx.py
 build_docx.py
+__pycache__/
+*.pyc
+wiki_update.log
 nul
