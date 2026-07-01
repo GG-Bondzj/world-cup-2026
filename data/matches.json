@@ -65,26 +65,32 @@
           "events": "进球：罗莫(50'——韩国门将金承奎出击失误送礼) | 墨西哥提前出线！"
         },
         {
-          "status": "pending",
-          "time": "6月25日 09:00",
+          "status": "finished",
+          "time": "6月25日 09:00 ✅ 已结束",
           "month": 6,
           "day": 25,
           "kickoff": "09:00",
           "home": "🇲🇽 墨西哥",
           "away": "捷克 🇨🇿",
           "venue": "📍 墨西哥城",
-          "group": "A组"
+          "group": "A组",
+          "score_home": 3,
+          "score_away": 0,
+          "events": "进球：查韦斯(55')、基尼奥内斯(61')、菲达尔戈(下补时)"
         },
         {
-          "status": "pending",
-          "time": "6月25日 09:00",
+          "status": "finished",
+          "time": "6月25日 09:00 ✅ 已结束",
           "month": 6,
           "day": 25,
           "kickoff": "09:00",
           "home": "🇰🇷 韩国",
           "away": "南非 🇿🇦",
           "venue": "📍 蒙特雷",
-          "group": "A组"
+          "group": "A组",
+          "score_home": 0,
+          "score_away": 1,
+          "events": "进球：马塞科(63'低射)"
         }
       ]
     },
@@ -153,26 +159,32 @@
           "events": "进球：戴维帽子戏法(29'、45+'、90+')、拉林(16')、萨利巴(64')、卡塔尔乌龙(75') | 卡塔尔2人红牌"
         },
         {
-          "status": "pending",
-          "time": "6月25日 03:00",
+          "status": "finished",
+          "time": "6月25日 03:00 ✅ 已结束",
           "month": 6,
           "day": 25,
           "kickoff": "03:00",
           "home": "🇨🇦 加拿大",
           "away": "瑞士 🇨🇭",
           "venue": "📍 温哥华",
-          "group": "B组"
+          "group": "B组",
+          "score_home": 1,
+          "score_away": 2,
+          "events": "进球：巴尔加斯(46')、曼赞比(恩博洛助攻)、戴维(替补扳回)"
         },
         {
-          "status": "pending",
-          "time": "6月25日 03:00",
+          "status": "finished",
+          "time": "6月25日 03:00 ✅ 已结束",
           "month": 6,
           "day": 25,
           "kickoff": "03:00",
           "home": "🇶🇦 卡塔尔",
           "away": "波黑 🇧🇦",
           "venue": "📍 西雅图",
-          "group": "B组"
+          "group": "B组",
+          "score_home": 1,
+          "score_away": 3,
+          "events": "进球：阿拉伊贝戈维奇(29'世界波，18岁创纪录)、布雷克(34'乌龙)、海多斯(42')、马赫米奇(80')"
         }
       ]
     },
@@ -242,26 +254,32 @@
           "events": "进球：库尼亚(23'、36')、维尼修斯(45+3') | 海地成首支被淘汰球队"
         },
         {
-          "status": "pending",
-          "time": "6月25日 06:00",
+          "status": "finished",
+          "time": "6月25日 06:00 ✅ 已结束",
           "month": 6,
           "day": 25,
           "kickoff": "06:00",
           "home": "🏴󠁧󠁢󠁳󠁣󠁴󠁿 苏格兰",
           "away": "巴西 🇧🇷",
           "venue": "📍 迈阿密",
-          "group": "C组"
+          "group": "C组",
+          "score_home": 0,
+          "score_away": 3,
+          "events": "进球：维尼修斯(7'、上半场补时)、库尼亚(60')"
         },
         {
-          "status": "pending",
-          "time": "6月25日 06:00",
+          "status": "finished",
+          "time": "6月25日 06:00 ✅ 已结束",
           "month": 6,
           "day": 25,
           "kickoff": "06:00",
           "home": "🇲🇦 摩洛哥",
           "away": "海地 🇭🇹",
           "venue": "📍 亚特兰大",
-          "group": "C组"
+          "group": "C组",
+          "score_home": 4,
+          "score_away": 2,
+          "events": "进球：阿什拉夫(扳平)、赛巴里(再扳平)、拉希米(78'反超)、亚辛(89'锁定)；海地：布努(10'乌龙)、伊西多尔(43'世界波)"
         }
       ]
     },
@@ -1938,31 +1956,40 @@
           "group": "F组"
         },
         {
-          "time": "7月1日 01:00",
+          "time": "7月1日 01:00 ✅ 已结束",
           "home": "🇨🇮 科特迪瓦",
           "away": "挪威 🇳🇴",
           "venue": "📍 1/16决赛 · 达拉斯AT&T体育场",
           "tag": "★ E组第2 vs I组第2",
           "group": "E组",
-          "status": "pending"
+          "status": "finished",
+          "score_home": 1,
+          "score_away": 2,
+          "events": "进球：努萨(39') | 科特迪瓦：迪亚洛(74') | 挪威：哈兰德(86'绝杀) | 挪威晋级16强将战巴西"
         },
         {
-          "time": "7月1日 05:00",
+          "time": "7月1日 05:00 ✅ 已结束",
           "home": "🇫🇷 法国",
           "away": "瑞典 🇸🇪",
           "venue": "📍 1/16决赛 · 新泽西MetLife体育场",
           "tag": "★ I组第1 vs F组第3",
           "group": "I组",
-          "status": "pending"
+          "status": "finished",
+          "score_home": 3,
+          "score_away": 0,
+          "events": "进球：姆巴佩(45'、74'梅开二度)、巴尔科拉(53') | 法国晋级16强将战巴拉圭"
         },
         {
-          "time": "7月1日 09:00",
+          "time": "7月1日 09:00 ✅ 已结束",
           "home": "🇲🇽 墨西哥",
           "away": "厄瓜多尔 🇪🇨",
           "venue": "📍 1/16决赛 · 墨西哥城阿兹特克体育场",
           "tag": "★ A组第1 vs E组第3",
           "group": "A组",
-          "status": "pending"
+          "status": "finished",
+          "score_home": 2,
+          "score_away": 0,
+          "events": "进球：基尼奥内斯(22')、希门尼斯(31'基尼奥内斯助攻) | 赛前因雷暴推迟 | 墨西哥晋级16强"
         },
         {
           "time": "7月2日 00:00",
@@ -2056,22 +2083,22 @@
       "matches": [
         {
           "time": "7月5日 03:00",
-          "home": "1/16胜者1",
-          "away": "1/16胜者2"
+          "home": "🇨🇦 加拿大",
+          "away": "摩洛哥 🇲🇦"
         },
         {
           "time": "7月5日 08:00",
-          "home": "1/16胜者3",
-          "away": "1/16胜者4"
+          "home": "🇧🇷 巴西",
+          "away": "挪威 🇳🇴"
         },
         {
           "time": "7月6日 03:00",
-          "home": "1/16胜者5",
-          "away": "1/16胜者6"
+          "home": "🇵🇾 巴拉圭",
+          "away": "法国 🇫🇷"
         },
         {
           "time": "7月6日 08:00",
-          "home": "1/16胜者7",
+          "home": "🇲🇽 墨西哥",
           "away": "1/16胜者8"
         },
         {
