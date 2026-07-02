@@ -294,14 +294,16 @@ def _ko_preview_card(team_name, ko):
     if resolved:
         return f'<div class="ko-card-locked"><div class="ko-card-flag">{resolved}</div></div>'
 
-    # 2. 已填实际队名
+    # 2. 已填实际队名（直接显示原始名称，无需强制匹配 FLAGS）
     clean = clean_team(team_name)
-    if clean and clean in FLAGS:
-        return f'<div class="ko-card-locked"><div class="ko-card-flag">{flag(clean)} {clean}</div></div>'
+    if clean and not _re.search(r'(1/\d+|半决赛|季军赛|决赛)?(胜者|负者)\d+', clean):
+        # 保留原始名称（含国旗），直接显示
+        return f'<div class="ko-card-locked"><div class="ko-card-flag">{team_name}</div></div>'
 
     # 3. 占位符（如 "1/8胜者1", "半决赛负者1"）
     test = clean_team(team_name)
     if _re.search(r'(1/\d+|半决赛|季军赛|决赛)?(胜者|负者)\d+', test) or '胜者' in test or '负者' in test:
+        return f'<div class="ko-card-next"><div class="ko-card-label">🔮 {test}</div></div>'
         return f'<div class="ko-card-next"><div class="ko-card-label">🔮 {test}</div></div>'
 
     # 4. 待定
