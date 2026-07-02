@@ -11,25 +11,32 @@ on:
 jobs:
   update:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Check date
+        id: check
         run: |
           # 只在 6/29 - 7/4 期间执行（淘汰赛 1/16 阶段）
           DAY=$(date +%m%d)
           if [[ "$DAY" < "0629" ]] || [[ "$DAY" > "0704" ]]; then
+            echo "should_run=false" >> "$GITHUB_OUTPUT"
             echo "不在 1/16 阶段，跳过执行 (日期: $DAY)"
-            exit 78  # exit 78 表示跳过的标准退出码
+          else
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            echo "在 1/16 阶段日期范围内，继续执行"
           fi
-          echo "在 1/16 阶段日期范围内，继续执行"
 
       - uses: actions/checkout@v4
+        if: steps.check.outputs.should_run == 'true'
 
       - name: Setup Python
         uses: actions/setup-python@v5
+        if: steps.check.outputs.should_run == 'true'
         with:
           python-version: '3.12'
 
       - name: Search for Today's Results
+        if: steps.check.outputs.should_run == 'true'
         run: |
           echo "=== 搜索今日世界杯比赛结果 ==="
           # 这里可以调用搜索 API
@@ -37,17 +44,20 @@ jobs:
           echo "需要手动更新或使用其他方案"
 
       - name: Update matches.json
+        if: steps.check.outputs.should_run == 'true'
         run: |
           echo "=== 更新数据 ==="
           echo "提示: 请在本地更新 data/matches.json 后推送"
           echo "或者使用 WebSearch 获取结果后手动编辑"
 
       - name: Generate HTML
+        if: steps.check.outputs.should_run == 'true'
         run: |
           pip install jinja2
           python scripts/generate_html.py
 
       - name: Commit and Push
+        if: steps.check.outputs.should_run == 'true'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
