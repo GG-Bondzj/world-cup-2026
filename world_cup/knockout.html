@@ -6,562 +6,388 @@
     <title>淘汰赛阶段 - 2026年美加墨世界杯</title>
     <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Microsoft YaHei', 'PingFang SC', 'Segoe UI', sans-serif; background: linear-gradient(160deg, #0a0a1a 0%, #0f172a 30%, #1a1040 60%, #0f172a 100%); min-height: 100vh; color: #e2e8f0; overflow-x:hidden; }
+body { font-family: 'Microsoft YaHei', 'PingFang SC', sans-serif; background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%); min-height: 100vh; color: #fff; }
 .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
-
-/* 动态背景 */
-body::before { content:''; position:fixed; top:0; left:0; width:100%; height:100%; background: radial-gradient(ellipse at 20% 20%, rgba(245,158,11,0.08) 0%, transparent 50%), radial-gradient(ellipse at 80% 80%, rgba(139,92,246,0.06) 0%, transparent 50%); pointer-events:none; z-index:0; }
-
-/* 头部 */
-.header { text-align: center; padding: 40px 20px; background: radial-gradient(ellipse at center, rgba(245,158,11,0.15) 0%, transparent 70%); border-radius: 20px; margin-bottom: 30px; position:relative; overflow:hidden; }
-.header::before { content:''; position:absolute; top:-30%; left:-30%; width:160%; height:160%; background: conic-gradient(from 0deg, transparent, rgba(245,158,11,0.08), transparent, rgba(139,92,246,0.06), transparent); animation: headerSpin 15s linear infinite; }
-@keyframes headerSpin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
-.header > * { position:relative; z-index:1; }
-.header h1 { font-size: 2.8em; background: linear-gradient(135deg, #fbbf24, #f59e0b, #d97706, #fbbf24); background-size: 300% 300%; -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; animation: shimmer 3s ease infinite; }
-@keyframes shimmer { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
-.back-link { display: inline-block; margin-bottom: 20px; color: #f59e0b; text-decoration: none; padding: 8px 18px; background: rgba(245,158,11,0.1); border-radius: 10px; transition:all 0.3s; position:relative; z-index:2; }
-.back-link:hover { background: rgba(245,158,11,0.2); }
-
-/* 阶段区块 */
-.stage-section { background: rgba(255,255,255,0.03); border-radius: 20px; padding: 28px; margin-bottom: 24px; border:1px solid rgba(255,255,255,0.06); position:relative; overflow:hidden; }
-.stage-section::before { content:''; position:absolute; top:0; left:0; width:100%; height:3px; background: linear-gradient(90deg, transparent, rgba(245,158,11,0.5), transparent); }
-.stage-section.round16 { border-color: rgba(245,158,11,0.15); }
-.stage-section.round16::before { background: linear-gradient(90deg, transparent, #f59e0b, transparent); }
-.stage-section.round8 { border-color: rgba(139,92,246,0.15); }
-.stage-section.round8::before { background: linear-gradient(90deg, transparent, #8b5cf6, transparent); }
-.stage-section.quarter { border-color: rgba(236,72,153,0.15); }
-.stage-section.quarter::before { background: linear-gradient(90deg, transparent, #ec4899, transparent); }
-.stage-section.semi { border-color: rgba(59,130,246,0.2); }
-.stage-section.semi::before { background: linear-gradient(90deg, transparent, #3b82f6, transparent); }
-.stage-section.final::before, .stage-section.third::before { background: linear-gradient(90deg, transparent, #fbbf24, transparent, #ef4444); }
-.stage-title { color: #f59e0b; font-size: 1.5em; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid rgba(245,158,11,0.15); display: flex; align-items: center; gap: 12px; flex-wrap:wrap; }
-.stage-badge { background: linear-gradient(135deg, #f59e0b, #d97706); color: #0a0a1a; padding: 6px 18px; border-radius: 25px; font-size: 0.85em; font-weight: bold; box-shadow: 0 4px 15px rgba(245,158,11,0.3); }
-.stage-badge.final { background: linear-gradient(135deg, #fbbf24, #f59e0b, #ef4444); animation: finalPulse 2s ease-in-out infinite; }
-.stage-badge.third { background: linear-gradient(135deg, #cd7f32, #b8860b); }
-@keyframes finalPulse { 0%,100%{box-shadow:0 4px 15px rgba(245,158,11,0.4)} 50%{box-shadow:0 4px 25px rgba(245,158,11,0.7)} }
-
-/* 进度条 */
-.stage-progress { height: 6px; background: rgba(255,255,255,0.1); border-radius: 3px; margin-top: 20px; overflow: hidden; }
-.stage-progress-bar { height: 100%; border-radius: 3px; transition: width 0.5s ease; }
-.stage-progress-done { background: linear-gradient(90deg, #22c55e, #4ade80); }
-.stage-progress-live { background: linear-gradient(90deg, #ef4444, #f87171); animation: pulse 1s infinite; }
-.stage-progress-pending { background: linear-gradient(90deg, #6366f1, #8b5cf6); }
-
-/* 比赛卡片 */
-.match-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
-.match-item { background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02)); border-radius: 16px; padding: 22px; border:1px solid rgba(255,255,255,0.06); transition:all 0.4s cubic-bezier(0.4,0,0.2,1); position:relative; overflow:hidden; }
-.match-item::before { content:''; position:absolute; top:0; left:0; width:4px; height:100%; background: #8b5cf6; transition:all 0.3s; }
-.match-item:hover { background: linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04)); transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,0.3); }
-.match-item:hover::before { width:6px; background: #f59e0b; }
-.match-item.finished { opacity:0.9; }
-.match-item.finished::before { background: #22c55e; }
-.match-item.live { border-color: rgba(239,68,68,0.3); animation: liveGlow 2s ease-in-out infinite; }
-.match-item.live::before { background: #ef4444; }
-@keyframes liveGlow { 0%,100%{box-shadow:0 0 15px rgba(239,68,68,0.2)} 50%{box-shadow:0 0 30px rgba(239,68,68,0.4)} }
-.match-item.highlight { border-color: rgba(245,158,11,0.2); background: linear-gradient(135deg, rgba(245,158,11,0.08), rgba(217,119,6,0.03)); }
-.match-item.highlight::before { background: #f59e0b; }
-.match-item.final-item { border-color: rgba(251,191,36,0.3); background: linear-gradient(135deg, rgba(245,158,11,0.12), rgba(239,68,68,0.06)); box-shadow: 0 0 40px rgba(245,158,11,0.1); }
-.match-item.final-item::before { background: linear-gradient(180deg, #fbbf24, #f59e0b); }
-.match-item.third-item { border-color: rgba(205,127,50,0.3); background: linear-gradient(135deg, rgba(205,127,50,0.08), rgba(184,134,11,0.04)); }
-.match-item.third-item::before { background: linear-gradient(180deg, #cd7f32, #b8860b); }
-
-/* 比分和时间 */
-.match-time { color: #f59e0b; font-weight: bold; margin-bottom: 14px; font-size: 0.95em; display:flex; align-items:center; gap:8px; }
-.match-teams { display: flex; justify-content: space-between; align-items: center; font-size: 1.15em; margin-bottom: 12px; }
-.match-team { display:flex; align-items:center; gap:10px; flex:1; }
-.match-team.right { justify-content: flex-end; text-align:right; }
-.match-team-name { font-weight: 500; }
-.match-vs { color: #64748b; font-size: 0.85em; font-weight: bold; }
-.match-score { font-size: 1.4em; font-weight: bold; color: #f59e0b; margin: 12px 0; text-align:center; padding: 10px; background: rgba(245,158,11,0.1); border-radius: 10px; }
-.match-score.final-score { color: #fbbf24; font-size: 1.8em; text-shadow: 0 0 20px rgba(245,158,11,0.5); background: linear-gradient(135deg, rgba(251,191,36,0.15), rgba(245,158,11,0.08)); animation: scoreGlow 2s ease-in-out infinite; }
-@keyframes scoreGlow { 0%,100%{box-shadow:0 0 15px rgba(251,191,36,0.2)} 50%{box-shadow:0 0 30px rgba(251,191,36,0.4)} }
-.match-score.pending { color: #475569; font-size: 1em; background: rgba(255,255,255,0.03); }
-.match-badge { display: inline-block; padding: 5px 14px; border-radius: 15px; font-size: 0.82em; margin-bottom: 12px; font-weight:bold; }
-.match-badge.live { background: rgba(239,68,68,0.15); color: #ef4444; animation: pulse 2s infinite; }
-.match-badge.done { background: rgba(34,197,94,0.15); color: #22c55e; }
-.match-badge.upcoming { background: rgba(139,92,246,0.12); color: #a78bfa; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
-.events-line { color: #94a3b8; font-size: 0.82em; margin-top: 10px; line-height: 1.5; }
-
-/* 决赛特有 */
-.final-crown { font-size: 2em; text-align: center; margin-bottom: 10px; animation: float 3s ease-in-out infinite; }
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-.final-venue { margin-top: 14px; color: #fbbf24; font-weight: bold; display: flex; align-items: center; gap: 8px; justify-content: center; }
-.final-date { color: #f59e0b; font-size: 1.1em; font-weight: bold; margin-bottom: 8px; }
-
-/* 页脚 */
-.footer { text-align: center; color: #555; padding: 30px 20px; margin-top: 30px; font-size:0.85em; border-top:1px solid rgba(255,255,255,0.05); }
-
-/* 响应式 */
-@media (max-width: 768px) { .match-grid { grid-template-columns: 1fr; } .header h1 { font-size: 2em; } .stage-title { font-size: 1.3em; } }
+.header { text-align: center; padding: 40px 20px; background: linear-gradient(90deg, rgba(255,215,0,0.2), rgba(255,140,0,0.2)); border-radius: 20px; margin-bottom: 30px; }
+.header h1 { font-size: 2.5em; background: linear-gradient(90deg, #ffd700, #ff8c00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; margin-bottom: 10px; }
+.back-link { display: inline-block; margin-bottom: 20px; color: #ffd700; text-decoration: none; padding: 8px 16px; background: rgba(255,215,0,0.1); border-radius: 8px; }
+.back-link:hover { background: rgba(255,215,0,0.2); }
+.stage-section { background: rgba(255,255,255,0.05); border-radius: 15px; padding: 25px; margin-bottom: 20px; }
+.stage-title { color: #ffd700; font-size: 1.5em; margin-bottom: 20px; padding-bottom: 10px; border-bottom: 2px solid rgba(255,215,0,0.3); display: flex; align-items: center; gap: 10px; }
+.stage-badge { background: linear-gradient(135deg, #ffd700, #ff8c00); color: #1a1a2e; padding: 5px 15px; border-radius: 20px; font-size: 0.8em; font-weight: bold; }
+.final-badge { background: linear-gradient(135deg, #ffd700, #ff4500); }
+.match-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 15px; }
+.match-item { background: rgba(255,255,255,0.08); border-radius: 12px; padding: 20px; border-left: 4px solid #7F77DD; }
+.match-item.highlight { border-left-color: #D85A30; background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(255,100,0,0.1)); }
+.match-item.final-item { border-left-color: #ffd700; background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(255,140,0,0.15)); }
+.match-time { color: #ffd700; font-weight: bold; margin-bottom: 12px; font-size: 0.95em; }
+.match-teams { display: flex; justify-content: space-between; align-items: center; font-size: 1.1em; }
+.match-vs { color: #888; font-size: 0.85em; }
+.match-score { font-size: 1.3em; font-weight: bold; color: #4ade80; margin-left: 15px; }
+.match-score.pending { color: #666; font-size: 0.9em; }
+.match-venue { color: #888; font-size: 0.85em; margin-top: 8px; }
+.footer { text-align: center; color: #666; padding: 20px; margin-top: 30px; }
+@media (max-width: 768px) { .match-grid { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
     <div class="container">
         <a href="index.html" class="back-link">← 返回首页</a>
         <div class="header"><h1>🏆 淘汰赛阶段</h1></div>
-        <div class="stage-section round16">
-            <div class="stage-title">
-                <span class="stage-badge ">⚔️ 1/16决赛</span>
-                <span style="color:#94a3b8;font-size:0.85em;font-weight:normal;margin-left:auto;">6月29日 - 7月4日</span>
-            </div>
+        <div class="stage-section">
+            <div class="stage-title"><span class="stage-badge ">⚔️ 1/16决赛</span> 6月29日 - 7月4日</div>
             <div class="match-grid">
-                <div class="match-item  finished" id="round16">
-                    <span class="match-badge done">✅ 已结束</span>
+                <div class="match-item ">
+                    <div class="match-time">6月29日 03:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇿🇦 🇿🇦 南非</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇨🇦 加拿大 🇨🇦</span></div>
+                        <span>🇿🇦 南非</span>
+                        <span class="match-vs">vs</span>
+                        <span>加拿大 🇨🇦</span>
                     </div>
-                    <div class="match-score ">0 - 1</div>
-                    
-                    <div class="events-line">📝 进球：欧斯塔基奥(90+2'禁区内贴地斩绝杀) | 加拿大队史首次晋级世界杯16强</div>
-                    
-                </div>
-                <div class="match-item  finished" id="round16-2">
-                    <span class="match-badge done">✅ 已结束</span>
+                    <span class="match-score">0-1</span>
+                    <div class="match-venue">📍 1/16决赛 · 洛杉矶SoFi体育场</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：欧斯塔基奥(90+2'禁区内贴地斩绝杀) | 加拿大队史首次晋级世界杯16强</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">6月30日 01:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇧🇷 🇧🇷 巴西</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇯🇵 日本 🇯🇵</span></div>
+                        <span>🇧🇷 巴西</span>
+                        <span class="match-vs">vs</span>
+                        <span>日本 🇯🇵</span>
                     </div>
-                    <div class="match-score ">2 - 1</div>
-                    
-                    <div class="events-line">📝 进球：佐野海舟(29') | 巴西：卡塞米罗(56'头球)、马丁内利(90+6'绝杀) | 日本止步淘汰赛首轮</div>
-                    
-                </div>
-                <div class="match-item  finished" id="round16-3">
-                    <span class="match-badge done">✅ 已结束</span>
+                    <span class="match-score">2-1</span>
+                    <div class="match-venue">📍 1/16决赛 · 休斯顿NRG体育场</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：佐野海舟(29') | 巴西：卡塞米罗(56'头球)、马丁内利(90+6'绝杀) | 日本止步淘汰赛首轮</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">6月30日 04:30 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇩🇪 🇩🇪 德国</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇵🇾 巴拉圭 🇵🇾</span></div>
+                        <span>🇩🇪 德国</span>
+                        <span class="match-vs">vs</span>
+                        <span>巴拉圭 🇵🇾</span>
                     </div>
-                    <div class="match-score ">1 - 1</div>
-                    
-                    <div class="events-line">📝 进球：恩西索(42'俯冲头球) | 德国：哈弗茨(54'甩头) | 加时赛塔(102')头球因安东干扰门将被VAR取消 | 点球大战德国3-4巴拉圭，总比分4-5爆冷出局，连续三届止步32强</div>
-                    
-                </div>
-                <div class="match-item  finished" id="round16-4">
-                    <span class="match-badge done">✅ 已结束</span>
+                    <span class="match-score">1-1</span>
+                    <div class="match-venue">📍 1/16决赛 · 波士顿吉列体育场</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：恩西索(42'俯冲头球) | 德国：哈弗茨(54'甩头) | 加时赛塔(102')头球因安东干扰门将被VAR取消 | 点球大战德国3-4巴拉圭，总比分4-5爆冷出局，连续三届止步32强</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">6月30日 09:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇳🇱 🇳🇱 荷兰</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇲🇦 摩洛哥 🇲🇦</span></div>
+                        <span>🇳🇱 荷兰</span>
+                        <span class="match-vs">vs</span>
+                        <span>摩洛哥 🇲🇦</span>
                     </div>
-                    <div class="match-score ">1 - 1</div>
-                    
-                    <div class="events-line">📝 进球：加克波(72'抽射，献给夭折儿子) | 摩洛哥：迪奥普(91'头球绝平) | 点球大战摩洛哥3-2荷兰，总比分4-3晋级 | 布努扑出萨默维尔点球，塞巴里一锤定音</div>
-                    
-                </div>
-                <div class="match-item  finished" id="round16-5">
-                    <span class="match-badge done">✅ 已结束</span>
+                    <span class="match-score">1-1</span>
+                    <div class="match-venue">📍 1/16决赛 · 蒙特雷Estadio Monterrey</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：加克波(72'抽射，献给夭折儿子) | 摩洛哥：迪奥普(91'头球绝平) | 点球大战摩洛哥3-2荷兰，总比分4-3晋级 | 布努扑出萨默维尔点球，塞巴里一锤定音</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月1日 01:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇨🇮 🇨🇮 科特迪瓦</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇳🇴 挪威 🇳🇴</span></div>
+                        <span>🇨🇮 科特迪瓦</span>
+                        <span class="match-vs">vs</span>
+                        <span>挪威 🇳🇴</span>
                     </div>
-                    <div class="match-score ">1 - 2</div>
-                    
-                    <div class="events-line">📝 进球：努萨(39') | 科特迪瓦：迪亚洛(74') | 挪威：哈兰德(86'绝杀) | 挪威晋级16强将战巴西</div>
-                    
-                </div>
-                <div class="match-item  finished" id="round16-6">
-                    <span class="match-badge done">✅ 已结束</span>
+                    <span class="match-score">1-2</span>
+                    <div class="match-venue">📍 1/16决赛 · 达拉斯AT&T体育场</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：努萨(39') | 科特迪瓦：迪亚洛(74') | 挪威：哈兰德(86'绝杀) | 挪威晋级16强将战巴西</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月1日 05:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇫🇷 🇫🇷 法国</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇸🇪 瑞典 🇸🇪</span></div>
+                        <span>🇫🇷 法国</span>
+                        <span class="match-vs">vs</span>
+                        <span>瑞典 🇸🇪</span>
                     </div>
-                    <div class="match-score ">3 - 0</div>
-                    
-                    <div class="events-line">📝 进球：姆巴佩(45'、74'梅开二度)、巴尔科拉(53') | 法国晋级16强将战巴拉圭</div>
-                    
-                </div>
-                <div class="match-item  finished" id="round16-7">
-                    <span class="match-badge done">✅ 已结束</span>
+                    <span class="match-score">3-0</span>
+                    <div class="match-venue">📍 1/16决赛 · 新泽西MetLife体育场</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：姆巴佩(45'、74'梅开二度)、巴尔科拉(53') | 法国晋级16强将战巴拉圭</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月1日 09:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇲🇽 🇲🇽 墨西哥</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇪🇨 厄瓜多尔 🇪🇨</span></div>
+                        <span>🇲🇽 墨西哥</span>
+                        <span class="match-vs">vs</span>
+                        <span>厄瓜多尔 🇪🇨</span>
                     </div>
-                    <div class="match-score ">2 - 0</div>
-                    
-                    <div class="events-line">📝 进球：基尼奥内斯(22')、希门尼斯(31'基尼奥内斯助攻) | 赛前因雷暴推迟 | 墨西哥晋级16强</div>
-                    
-                </div>
-                <div class="match-item  finished" id="round16-8">
-                    <span class="match-badge done">✅ 已结束</span>
+                    <span class="match-score">2-0</span>
+                    <div class="match-venue">📍 1/16决赛 · 墨西哥城阿兹特克体育场</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：基尼奥内斯(22')、希门尼斯(31'基尼奥内斯助攻) | 赛前因雷暴推迟 | 墨西哥晋级16强</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月2日 00:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 🏴󠁧󠁢󠁥󠁮󠁧󠁿 英格兰</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>刚果（金） 🇨🇩</span></div>
+                        <span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 英格兰</span>
+                        <span class="match-vs">vs</span>
+                        <span>刚果（金） 🇨🇩</span>
                     </div>
-                    <div class="match-score ">2 - 1</div>
-                    
-                    <div class="events-line">📝 进球：刚果(金)西庞加(7'姆本巴助攻) | 英格兰：凯恩(75'头球戈登助攻、86'爆射戈登助攻梅开二度) | 凯恩11分钟双响逆转！英格兰晋级16强将战墨西哥</div>
-                    
-                </div>
-                <div class="match-item  finished" id="round16-9">
-                    <span class="match-badge done">✅ 已结束</span>
+                    <span class="match-score">2-1</span>
+                    <div class="match-venue">📍 1/16决赛 · 亚特兰大奔驰体育场</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：刚果(金)西庞加(7'姆本巴助攻) | 英格兰：凯恩(75'头球戈登助攻、86'爆射戈登助攻梅开二度) | 凯恩11分钟双响逆转！英格兰晋级16强将战墨西哥</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月2日 04:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇧🇪 🇧🇪 比利时</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇸🇳 塞内加尔 🇸🇳</span></div>
+                        <span>🇧🇪 比利时</span>
+                        <span class="match-vs">vs</span>
+                        <span>塞内加尔 🇸🇳</span>
                     </div>
-                    <div class="match-score ">3 - 2</div>
-                    
-                    <div class="events-line">📝 进球：塞内加尔迪亚拉(25'补射)、萨尔(51'凌空抽射) | 比利时：卢卡库(86'抽射)、蒂莱曼斯(89'头球绝平)、蒂莱曼斯(加时点球制胜) | 比利时86分钟后连扳2球+加时点球惊天逆转！晋级16强将战美国</div>
-                    
-                </div>
-                <div class="match-item  finished" id="round16-10">
-                    <span class="match-badge done">✅ 已结束</span>
+                    <span class="match-score">3-2</span>
+                    <div class="match-venue">📍 1/16决赛 · 西雅图Lumen Field</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：塞内加尔迪亚拉(25'补射)、萨尔(51'凌空抽射) | 比利时：卢卡库(86'抽射)、蒂莱曼斯(89'头球绝平)、蒂莱曼斯(加时点球制胜) | 比利时86分钟后连扳2球+加时点球惊天逆转！晋级16强将战美国</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月2日 08:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇺🇸 🇺🇸 美国</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇧🇦 波黑 🇧🇦</span></div>
+                        <span>🇺🇸 美国</span>
+                        <span class="match-vs">vs</span>
+                        <span>波黑 🇧🇦</span>
                     </div>
-                    <div class="match-score ">2 - 0</div>
-                    
-                    <div class="events-line">📝 进球：巴洛贡(45'左脚推射)、蒂尔曼(任意球直接破门) | 巴洛贡64'红牌罚下，10人美国仍2-0零封波黑 | 美国晋级16强将战比利时，三支东道主全进16强！</div>
-                    
-                </div>
-                <div class="match-item " id="round16-11">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                    <span class="match-score">2-0</span>
+                    <div class="match-venue">📍 1/16决赛 · 旧金山湾区Levi's体育场</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：巴洛贡(45'左脚推射)、蒂尔曼(任意球直接破门) | 巴洛贡64'红牌罚下，10人美国仍2-0零封波黑 | 美国晋级16强将战比利时，三支东道主全进16强！</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月3日 03:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇪🇸 🇪🇸 西班牙</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇦🇹 奥地利 🇦🇹</span></div>
+                        <span>🇪🇸 西班牙</span>
+                        <span class="match-vs">vs</span>
+                        <span>奥地利 🇦🇹</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
-                    
-                    
-                    
-                </div>
-                <div class="match-item " id="round16-12">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                    <span class="match-score">3-0</span>
+                    <div class="match-venue">📍 1/16决赛 · 洛杉矶SoFi体育场</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：奥亚萨瓦尔(36'、89'库库雷利亚助攻梅开二度)、波罗(66'头球巴埃纳助攻) | 西班牙轻松晋级 | 库库雷利亚2次助攻</div>
+                </div>                <div class="match-item highlight">
+                    <div class="match-time">7月3日 07:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇵🇹 🇵🇹 葡萄牙</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇭🇷 克罗地亚 🇭🇷</span></div>
+                        <span>🇵🇹 葡萄牙</span>
+                        <span class="match-vs">vs</span>
+                        <span>克罗地亚 🇭🇷</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
-                    
-                    
-                    
-                </div>
-                <div class="match-item " id="round16-13">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                    <span class="match-score">2-1</span>
+                    <div class="match-venue">📍 1/16决赛 · 多伦多BMO体育场</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：葡萄牙 拉莫斯(94'绝杀) | 克罗地亚：佩特科维奇下半场扳平被VAR改判越位无效、加时绝平进球被吹 | C罗下半场被换下 | 葡萄牙晋级16强将战瑞士</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月3日 11:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇨🇭 🇨🇭 瑞士</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇩🇿 阿尔及利亚 🇩🇿</span></div>
+                        <span>🇨🇭 瑞士</span>
+                        <span class="match-vs">vs</span>
+                        <span>阿尔及利亚 🇩🇿</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
-                    
-                    
-                    
-                </div>
-                <div class="match-item " id="round16-14">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                    <span class="match-score">2-0</span>
+                    <div class="match-venue">📍 1/16决赛 · 温哥华BC Place</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：恩博洛(上半场)、恩多耶(下半场开场凌空抽射) | 瑞士连续4届闯入16强 | 阿尔及利亚主帅佩特科维奇曾执教瑞士7年</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月4日 02:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇦🇺 🇦🇺 澳大利亚</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇪🇬 埃及 🇪🇬</span></div>
+                        <span>🇦🇺 澳大利亚</span>
+                        <span class="match-vs">vs</span>
+                        <span>埃及 🇪🇬</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
-                    
-                    
-                    
-                </div>
-                <div class="match-item " id="round16-15">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                    <span class="match-score">1-1</span>
+                    <div class="match-venue">📍 1/16决赛 · 达拉斯AT&T体育场</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：埃及 阿舒尔(14'哈菲兹助攻头球) | 澳大利亚：哈尼(下半场乌龙) | 点球大战：苏塔、赫林顿失点 埃及4-2晋级 | 埃及门将单场扑出2粒点球</div>
+                </div>                <div class="match-item highlight">
+                    <div class="match-time">7月4日 06:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇦🇷 🇦🇷 阿根廷</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇨🇻 佛得角 🇨🇻</span></div>
+                        <span>🇦🇷 阿根廷</span>
+                        <span class="match-vs">vs</span>
+                        <span>佛得角 🇨🇻</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
-                    
-                    
-                    
-                </div>
-                <div class="match-item " id="round16-16">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                    <span class="match-score">3-2</span>
+                    <div class="match-venue">📍 1/16决赛 · 迈阿密Hard Rock体育场</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：阿根廷 阿尔马达(45+3'加时)、梅西(加时)、劳塔罗(加时) | 佛得角门将罗查全场神扑封神，梅西失点 | 卫冕冠军加时苦战晋级</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月4日 09:30 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇨🇴 🇨🇴 哥伦比亚</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇬🇭 加纳 🇬🇭</span></div>
+                        <span>🇨🇴 哥伦比亚</span>
+                        <span class="match-vs">vs</span>
+                        <span>加纳 🇬🇭</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
-                    
-                    
-                    
-                </div>
-            </div>
-                        <div class="stage-progress">
-                <div class="stage-progress-bar stage-progress-pending" style="width: 62.5%;"></div>
-            </div>
-            <div style="margin-top:8px;font-size:0.8em;color:#64748b;text-align:right;">10 / 16 场  </div>
+                    <span class="match-score">1-0</span>
+                    <div class="match-venue">📍 1/16决赛 · 堪萨斯城箭头体育场</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：迪亚斯(下半场破门) | 哥伦比亚稳健晋级16强 | 1/8决赛将对阵瑞士</div>
+                </div>            </div>
         </div>
-        <div class="stage-section round8">
-            <div class="stage-title">
-                <span class="stage-badge ">🎯 1/8决赛</span>
-                <span style="color:#94a3b8;font-size:0.85em;font-weight:normal;margin-left:auto;">7月5日 - 7月8日</span>
-            </div>
+        <div class="stage-section">
+            <div class="stage-title"><span class="stage-badge ">🎯 1/8决赛</span> 7月5日 - 7月8日</div>
             <div class="match-grid">
-                <div class="match-item " id="round8">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                <div class="match-item ">
+                    <div class="match-time">7月5日 01:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇨🇦 🇨🇦 加拿大</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇲🇦 摩洛哥 🇲🇦</span></div>
+                        <span>🇨🇦 加拿大</span>
+                        <span class="match-vs">vs</span>
+                        <span>摩洛哥 🇲🇦</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
-                    
-                    
-                    
-                </div>
-                <div class="match-item " id="round8-2">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                    <span class="match-score">0-3</span>
+                    <div class="match-venue">📍 1/8决赛 · 西雅图Lumen Field</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：乌纳希(50'阿什拉夫助攻、82'迪亚斯助攻梅开二度)、拉希米(90+8'迪亚斯反击助攻) | 摩洛哥本届首支8强球队！连续两届闯入8强 | 加拿大成美加墨首支出局球队</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月5日 05:00 ✅ 已结束</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇧🇷 🇧🇷 巴西</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇳🇴 挪威 🇳🇴</span></div>
+                        <span>🇵🇾 巴拉圭</span>
+                        <span class="match-vs">vs</span>
+                        <span>法国 🇫🇷</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
-                    
-                    
-                    
-                </div>
-                <div class="match-item " id="round8-3">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                    <span class="match-score">0-1</span>
+                    <div class="match-venue">📍 1/8决赛 · 达拉斯AT&T体育场</div>
+                    <div style="margin-top:8px;padding:6px 10px;background:rgba(74,222,128,0.1);border-radius:6px;font-size:0.85em;color:#4ade80;">进球：姆巴佩(70'点球，杜埃造点) | 双方一度发生冲突 | 法国点球绝杀晋级8强，下轮对阵摩洛哥</div>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月6日 03:00</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇵🇾 🇵🇾 巴拉圭</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇫🇷 法国 🇫🇷</span></div>
+                        <span>🇵🇾 巴拉圭</span>
+                        <span class="match-vs">vs</span>
+                        <span>法国 🇫🇷</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
+                    <span class="match-score pending">等待开赛</span>
+                    <div class="match-venue">📍 1/8决赛 · 波士顿吉列体育场</div>
                     
-                    
-                    
-                </div>
-                <div class="match-item " id="round8-4">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月6日 08:00</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇲🇽 🇲🇽 墨西哥</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🏴󠁧󠁢󠁥󠁮󠁧󠁿 英格兰 🏴󠁧󠁢󠁥󠁮󠁧󠁿</span></div>
+                        <span>🇲🇽 墨西哥</span>
+                        <span class="match-vs">vs</span>
+                        <span>英格兰 🏴󠁧󠁢󠁥󠁮󠁧󠁿</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
+                    <span class="match-score pending">等待开赛</span>
+                    <div class="match-venue">📍 1/8决赛 · 墨西哥城阿兹特克体育场</div>
                     
-                    
-                    
-                </div>
-                <div class="match-item " id="round8-5">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月7日 03:00</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>1/16胜者11</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>1/16胜者12</span></div>
+                        <span>🇵🇹 葡萄牙</span>
+                        <span class="match-vs">vs</span>
+                        <span>🇨🇭 瑞士</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
+                    <span class="match-score pending">等待开赛</span>
+                    <div class="match-venue">📍 1/8决赛 · 多伦多BMO体育场</div>
                     
-                    
-                    
-                </div>
-                <div class="match-item " id="round8-6">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月7日 08:00</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>🇺🇸 🇺🇸 美国</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>🇧🇪 比利时 🇧🇪</span></div>
+                        <span>🇺🇸 美国</span>
+                        <span class="match-vs">vs</span>
+                        <span>比利时 🇧🇪</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
+                    <span class="match-score pending">等待开赛</span>
+                    <div class="match-venue">📍 1/8决赛 · 达拉斯AT&T体育场</div>
                     
-                    
-                    
-                </div>
-                <div class="match-item " id="round8-7">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月8日 00:00</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>1/16胜者13</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>1/16胜者14</span></div>
+                        <span>🇨🇭 瑞士</span>
+                        <span class="match-vs">vs</span>
+                        <span>埃及 🇪🇬</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
+                    <span class="match-score pending">等待开赛</span>
+                    <div class="match-venue">📍 1/8决赛 · 温哥华BC Place</div>
                     
-                    
-                    
-                </div>
-                <div class="match-item " id="round8-8">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                </div>                <div class="match-item highlight">
+                    <div class="match-time">7月8日 04:00</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>1/16胜者15</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>1/16胜者16</span></div>
+                        <span>🇦🇷 阿根廷</span>
+                        <span class="match-vs">vs</span>
+                        <span>哥伦比亚 🇨🇴</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
+                    <span class="match-score pending">等待开赛</span>
+                    <div class="match-venue">📍 1/8决赛 · 迈阿密Hard Rock体育场</div>
                     
-                    
-                    
-                </div>
-            </div>
-                        <div class="stage-progress">
-                <div class="stage-progress-bar stage-progress-pending" style="width: 0.0%;"></div>
-            </div>
-            <div style="margin-top:8px;font-size:0.8em;color:#64748b;text-align:right;">0 / 8 场  </div>
+                </div>            </div>
         </div>
-        <div class="stage-section quarter">
-            <div class="stage-title">
-                <span class="stage-badge ">💎 1/4决赛</span>
-                <span style="color:#94a3b8;font-size:0.85em;font-weight:normal;margin-left:auto;">7月10日 - 7月12日</span>
-            </div>
+        <div class="stage-section">
+            <div class="stage-title"><span class="stage-badge ">💎 1/4决赛</span> 7月10日 - 7月12日</div>
             <div class="match-grid">
-                <div class="match-item " id="quarter">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                <div class="match-item ">
+                    <div class="match-time">7月10日 03:00</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>1/8胜者1</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>1/8胜者2</span></div>
+                        <span>1/8胜者1</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/8胜者2</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
+                    <span class="match-score pending">等待开赛</span>
                     
                     
-                    
-                </div>
-                <div class="match-item " id="quarter-2">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月10日 08:00</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>1/8胜者3</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>1/8胜者4</span></div>
+                        <span>1/8胜者3</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/8胜者4</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
+                    <span class="match-score pending">等待开赛</span>
                     
                     
-                    
-                </div>
-                <div class="match-item " id="quarter-3">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月11日 03:00</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>1/8胜者5</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>1/8胜者6</span></div>
+                        <span>1/8胜者5</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/8胜者6</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
+                    <span class="match-score pending">等待开赛</span>
                     
                     
-                    
-                </div>
-                <div class="match-item " id="quarter-4">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                </div>                <div class="match-item ">
+                    <div class="match-time">7月11日 08:00</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>1/8胜者7</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>1/8胜者8</span></div>
+                        <span>1/8胜者7</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/8胜者8</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
+                    <span class="match-score pending">等待开赛</span>
                     
                     
-                    
-                </div>
-            </div>
-                        <div class="stage-progress">
-                <div class="stage-progress-bar stage-progress-pending" style="width: 0.0%;"></div>
-            </div>
-            <div style="margin-top:8px;font-size:0.8em;color:#64748b;text-align:right;">0 / 4 场  </div>
+                </div>            </div>
         </div>
-        <div class="stage-section semi">
-            <div class="stage-title">
-                <span class="stage-badge ">🌟 半决赛</span>
-                <span style="color:#94a3b8;font-size:0.85em;font-weight:normal;margin-left:auto;">7月15日 - 7月16日</span>
-            </div>
+        <div class="stage-section">
+            <div class="stage-title"><span class="stage-badge ">🌟 半决赛</span> 7月15日 - 7月16日</div>
             <div class="match-grid">
-                <div class="match-item highlight" id="semi">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                <div class="match-item highlight">
+                    <div class="match-time">7月15日 03:00</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>1/4胜者1</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>1/4胜者2</span></div>
+                        <span>1/4胜者1</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/4胜者2</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
+                    <span class="match-score pending">等待开赛</span>
                     
                     
-                    
-                </div>
-                <div class="match-item highlight" id="semi-2">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                </div>                <div class="match-item highlight">
+                    <div class="match-time">7月16日 03:00</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>1/4胜者3</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>1/4胜者4</span></div>
+                        <span>1/4胜者3</span>
+                        <span class="match-vs">vs</span>
+                        <span>1/4胜者4</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
+                    <span class="match-score pending">等待开赛</span>
                     
                     
-                    
-                </div>
-            </div>
-                        <div class="stage-progress">
-                <div class="stage-progress-bar stage-progress-pending" style="width: 0.0%;"></div>
-            </div>
-            <div style="margin-top:8px;font-size:0.8em;color:#64748b;text-align:right;">0 / 2 场  </div>
+                </div>            </div>
         </div>
-        <div class="stage-section third">
-            <div class="stage-title">
-                <span class="stage-badge final">🥉 季军赛</span>
-                <span style="color:#94a3b8;font-size:0.85em;font-weight:normal;margin-left:auto;">7月19日</span>
-            </div>
+        <div class="stage-section">
+            <div class="stage-title"><span class="stage-badge ">🥉 季军赛</span> 7月19日</div>
             <div class="match-grid">
-                <div class="match-item third-item" id="third">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                <div class="match-item ">
+                    <div class="match-time">7月19日 03:00</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>半决赛负者1</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>半决赛负者2</span></div>
+                        <span>半决赛负者1</span>
+                        <span class="match-vs">vs</span>
+                        <span>半决赛负者2</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
+                    <span class="match-score pending">等待开赛</span>
                     
                     
-                    <div class="final-venue" style="color:#cd7f32;">📍 7月19日 03:00 · 纽约大都会人寿体育场</div>
-                </div>
-            </div>
-                        <div class="stage-progress">
-                <div class="stage-progress-bar stage-progress-pending" style="width: 0.0%;"></div>
-            </div>
-            <div style="margin-top:8px;font-size:0.8em;color:#64748b;text-align:right;">0 / 1 场  </div>
+                </div>            </div>
         </div>
-        <div class="stage-section final">
-            <div class="stage-title">
-                <span class="stage-badge final">🏆 决赛</span>
-                <span style="color:#94a3b8;font-size:0.85em;font-weight:normal;margin-left:auto;">7月20日</span>
-            </div>
+        <div class="stage-section">
+            <div class="stage-title"><span class="stage-badge final-badge">🏆 决赛</span> 7月20日</div>
             <div class="match-grid">
-                <div class="match-item final-item" id="final">
-                    <span class="match-badge upcoming">⏳ 即将开赛</span>
+                <div class="match-item final-item">
+                    <div class="match-time">7月20日 03:00 🏆</div>
                     <div class="match-teams">
-                        <div class="match-team"><span>半决赛胜者1</span></div>
-                        <span class="match-vs">VS</span>
-                        <div class="match-team right"><span>半决赛胜者2</span></div>
+                        <span>半决赛胜者1</span>
+                        <span class="match-vs">vs</span>
+                        <span>半决赛胜者2</span>
                     </div>
-                    <div class="match-score pending">⚽ 等待开赛 ⚽</div>
+                    <span class="match-score pending">等待开赛</span>
+                    <div style="margin-top:12px;color:#ffd700;font-weight:bold;">📍 纽约大都会人寿体育场</div>
                     
-                    
-                                        <div class="final-crown">👑</div>
-                    <div class="final-date">📅 7月20日 03:00</div>
-                    <div class="final-venue">📍 纽约大都会人寿体育场</div>
-                </div>
-            </div>
-                        <div class="stage-progress">
-                <div class="stage-progress-bar stage-progress-pending" style="width: 0.0%;"></div>
-            </div>
-            <div style="margin-top:8px;font-size:0.8em;color:#64748b;text-align:right;">0 / 1 场  </div>
+                </div>            </div>
         </div>
 
         <div class="footer">
             <p>📌 赛事时间可能存在调整，请以官方最新公布为准</p>
-            <p>🔄 每日自动更新 · 对阵自动级联解析</p>
+            <p>🔄 每日自动更新</p>
         </div>
     </div>
 </body>

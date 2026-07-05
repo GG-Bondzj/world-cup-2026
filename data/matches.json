@@ -1901,6 +1901,101 @@
           "events": "进球：贝尔加利、马赫雷斯(60'、90+3') | 奥地利：阿瑙托维奇、扎比策、卡莱季奇(90+6'绝平)"
         }
       ]
+    },
+    "0703": {
+      "matches": [
+        {
+          "status": "finished",
+          "time": "03:00 ✅ 已结束",
+          "home": "🇪🇸 西班牙",
+          "away": "奥地利 🇦🇹",
+          "tag": "🔥 1/16决赛",
+          "group": "1/16决赛",
+          "score_home": 3,
+          "score_away": 0
+        },
+        {
+          "status": "finished",
+          "time": "07:00 ✅ 已结束",
+          "home": "🇵🇹 葡萄牙",
+          "away": "克罗地亚 🇭🇷",
+          "tag": "🔥 1/16决赛",
+          "group": "1/16决赛",
+          "score_home": 2,
+          "score_away": 1
+        },
+        {
+          "status": "finished",
+          "time": "11:00 ✅ 已结束",
+          "home": "🇨🇭 瑞士",
+          "away": "阿尔及利亚 🇩🇿",
+          "tag": "🔥 1/16决赛",
+          "group": "1/16决赛",
+          "score_home": 2,
+          "score_away": 0
+        }
+      ]
+    },
+    "0704": {
+      "matches": [
+        {
+          "status": "finished",
+          "time": "02:00 ✅ 已结束",
+          "home": "🇦🇺 澳大利亚",
+          "away": "埃及 🇪🇬",
+          "tag": "🔥 1/16决赛",
+          "group": "1/16决赛",
+          "score_home": 1,
+          "score_away": 1
+        },
+        {
+          "status": "finished",
+          "time": "06:00 ✅ 已结束",
+          "home": "🇦🇷 阿根廷",
+          "away": "佛得角 🇨🇻",
+          "highlight": true,
+          "tag": "🔥 1/16决赛",
+          "group": "1/16决赛",
+          "score_home": 3,
+          "score_away": 2
+        },
+        {
+          "status": "finished",
+          "time": "09:30 ✅ 已结束",
+          "home": "🇨🇴 哥伦比亚",
+          "away": "加纳 🇬🇭",
+          "tag": "🔥 1/16决赛",
+          "group": "1/16决赛",
+          "score_home": 1,
+          "score_away": 0
+        }
+      ]
+    },
+    "0705": {
+      "matches": [
+        {
+          "status": "finished",
+          "time": "01:00 ✅ 已结束",
+          "home": "🇨🇦 加拿大",
+          "away": "摩洛哥 🇲🇦",
+          "highlight": true,
+          "tag": "🔥 1/8决赛",
+          "group": "1/8决赛",
+          "score_home": 0,
+          "score_away": 3
+        },
+        {
+          "status": "finished",
+          "time": "05:00 ✅ 已结束",
+          "home": "🇵🇾 巴拉圭",
+          "away": "法国 🇫🇷",
+          "highlight": true,
+          "tag": "🔥 1/8决赛",
+          "group": "1/8决赛",
+          "score_home": 0,
+          "score_away": 1
+        }
+      ]
     }
   },
   "knockout": {
@@ -2028,60 +2123,78 @@
           "events": "进球：巴洛贡(45'左脚推射)、蒂尔曼(任意球直接破门) | 巴洛贡64'红牌罚下，10人美国仍2-0零封波黑 | 美国晋级16强将战比利时，三支东道主全进16强！"
         },
         {
-          "time": "7月3日 03:00",
+          "time": "7月3日 03:00 ✅ 已结束",
           "home": "🇪🇸 西班牙",
           "away": "奥地利 🇦🇹",
+          "score_home": 3,
+          "score_away": 0,
+          "status": "finished",
+          "events": "进球：奥亚萨瓦尔(36'、89'库库雷利亚助攻梅开二度)、波罗(66'头球巴埃纳助攻) | 西班牙轻松晋级 | 库库雷利亚2次助攻",
           "venue": "📍 1/16决赛 · 洛杉矶SoFi体育场",
           "tag": "★ H组第1 vs J组第2",
-          "group": "H组",
-          "status": "pending"
+          "group": "H组"
         },
         {
-          "time": "7月3日 07:00",
+          "time": "7月3日 07:00 ✅ 已结束",
           "home": "🇵🇹 葡萄牙",
           "away": "克罗地亚 🇭🇷",
+          "score_home": 2,
+          "score_away": 1,
+          "status": "finished",
+          "events": "进球：葡萄牙 拉莫斯(94'绝杀) | 克罗地亚：佩特科维奇下半场扳平被VAR改判越位无效、加时绝平进球被吹 | C罗下半场被换下 | 葡萄牙晋级16强将战瑞士",
           "venue": "📍 1/16决赛 · 多伦多BMO体育场",
-          "tag": "★ K组第2 vs L组第2",
           "highlight": true,
-          "group": "K组",
-          "status": "pending"
+          "tag": "★ K组第2 vs L组第2",
+          "group": "K组"
         },
         {
-          "time": "7月3日 11:00",
+          "time": "7月3日 11:00 ✅ 已结束",
           "home": "🇨🇭 瑞士",
           "away": "阿尔及利亚 🇩🇿",
+          "score_home": 2,
+          "score_away": 0,
+          "status": "finished",
+          "events": "进球：恩博洛(上半场)、恩多耶(下半场开场凌空抽射) | 瑞士连续4届闯入16强 | 阿尔及利亚主帅佩特科维奇曾执教瑞士7年",
           "venue": "📍 1/16决赛 · 温哥华BC Place",
           "tag": "★ B组第1 vs J组第3",
-          "group": "B组",
-          "status": "pending"
+          "group": "B组"
         },
         {
-          "time": "7月4日 02:00",
+          "time": "7月4日 02:00 ✅ 已结束",
           "home": "🇦🇺 澳大利亚",
           "away": "埃及 🇪🇬",
+          "score_home": 1,
+          "score_away": 1,
+          "status": "finished",
+          "events": "进球：埃及 阿舒尔(14'哈菲兹助攻头球) | 澳大利亚：哈尼(下半场乌龙) | 点球大战：苏塔、赫林顿失点 埃及4-2晋级 | 埃及门将单场扑出2粒点球",
           "venue": "📍 1/16决赛 · 达拉斯AT&T体育场",
           "tag": "★ D组第2 vs G组第2",
-          "group": "D组",
-          "status": "pending"
+          "group": "D组"
         },
         {
-          "time": "7月4日 06:00",
+          "time": "7月4日 06:00 ✅ 已结束",
           "home": "🇦🇷 阿根廷",
           "away": "佛得角 🇨🇻",
+          "score_home": 3,
+          "score_away": 2,
+          "status": "finished",
+          "events": "进球：阿根廷 阿尔马达(45+3'加时)、梅西(加时)、劳塔罗(加时) | 佛得角门将罗查全场神扑封神，梅西失点 | 卫冕冠军加时苦战晋级",
           "venue": "📍 1/16决赛 · 迈阿密Hard Rock体育场",
-          "tag": "★ J组第1 vs H组第2",
           "highlight": true,
-          "group": "J组",
-          "status": "pending"
+          "tag": "★ J组第1 vs H组第2",
+          "group": "J组"
         },
         {
-          "time": "7月4日 09:30",
+          "time": "7月4日 09:30 ✅ 已结束",
           "home": "🇨🇴 哥伦比亚",
           "away": "加纳 🇬🇭",
+          "score_home": 1,
+          "score_away": 0,
+          "status": "finished",
+          "events": "进球：迪亚斯(下半场破门) | 哥伦比亚稳健晋级16强 | 1/8决赛将对阵瑞士",
           "venue": "📍 1/16决赛 · 堪萨斯城箭头体育场",
           "tag": "★ K组第1 vs D组第3",
-          "group": "K组",
-          "status": "pending"
+          "group": "K组"
         }
       ]
     },
@@ -2091,18 +2204,26 @@
       "icon": "🎯",
       "matches": [
         {
-          "time": "7月5日 01:00",
+          "time": "7月5日 01:00 ✅ 已结束",
           "home": "🇨🇦 加拿大",
           "away": "摩洛哥 🇲🇦",
+          "score_home": 0,
+          "score_away": 3,
+          "status": "finished",
+          "events": "进球：乌纳希(50'阿什拉夫助攻、82'迪亚斯助攻梅开二度)、拉希米(90+8'迪亚斯反击助攻) | 摩洛哥本届首支8强球队！连续两届闯入8强 | 加拿大成美加墨首支出局球队",
           "venue": "📍 1/8决赛 · 西雅图Lumen Field",
           "tag": "★ 加拿大队史首进16强 vs 非洲黑马摩洛哥"
         },
         {
-          "time": "7月5日 05:00",
-          "home": "🇧🇷 巴西",
-          "away": "挪威 🇳🇴",
-          "venue": "📍 1/8决赛 · 纽约MetLife体育场",
-          "tag": "★ 桑巴军团 vs 北欧海盗 — 维尼修斯 vs 哈兰德"
+          "time": "7月5日 05:00 ✅ 已结束",
+          "home": "🇵🇾 巴拉圭",
+          "away": "法国 🇫🇷",
+          "score_home": 0,
+          "score_away": 1,
+          "status": "finished",
+          "events": "进球：姆巴佩(70'点球，杜埃造点) | 双方一度发生冲突 | 法国点球绝杀晋级8强，下轮对阵摩洛哥",
+          "venue": "📍 1/8决赛 · 达拉斯AT&T体育场",
+          "tag": "★ 巴拉圭黑马 vs 高卢雄鸡 — 姆巴佩继续冲击纪录"
         },
         {
           "time": "7月6日 03:00",
@@ -2120,9 +2241,11 @@
         },
         {
           "time": "7月7日 03:00",
-          "home": "1/16胜者11",
-          "away": "1/16胜者12",
-          "venue": "📍 1/8决赛"
+          "home": "🇵🇹 葡萄牙",
+          "away": "🇨🇭 瑞士",
+          "venue": "📍 1/8决赛 · 多伦多BMO体育场",
+          "tag": "★ K组第2 葡萄牙 vs B组第1 瑞士",
+          "status": "pending"
         },
         {
           "time": "7月7日 08:00",
@@ -2133,15 +2256,20 @@
         },
         {
           "time": "7月8日 00:00",
-          "home": "1/16胜者13",
-          "away": "1/16胜者14",
-          "venue": "📍 1/8决赛"
+          "home": "🇨🇭 瑞士",
+          "away": "埃及 🇪🇬",
+          "venue": "📍 1/8决赛 · 温哥华BC Place",
+          "tag": "★ 瑞士 vs 埃及",
+          "status": "pending"
         },
         {
           "time": "7月8日 04:00",
-          "home": "1/16胜者15",
-          "away": "1/16胜者16",
-          "venue": "📍 1/8决赛"
+          "home": "🇦🇷 阿根廷",
+          "away": "哥伦比亚 🇨🇴",
+          "venue": "📍 1/8决赛 · 迈阿密Hard Rock体育场",
+          "highlight": true,
+          "tag": "★ 南美德比 — 梅西 vs J罗",
+          "status": "pending"
         }
       ]
     },
